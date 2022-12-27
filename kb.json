@@ -1,4 +1,3 @@
-
 {
     "Nature of halogen":{
         "Fluorate": {
@@ -10,7 +9,6 @@
                 "Aggregation state": "Compressed gas",
                 "Melting point": "-183.6",
                 "Boiling point": "-127.8",
-                "Solubility in water": "0.005%V at 20°C 0.0038%V at 25°C",
                 "Density": "3.72",
                 "Polarity": "non-polar",
                 "Molecular mass": "88.004"
@@ -173,8 +171,128 @@
                 "Density": "1.940",
                 "Polarity": "Non-polar",
                 "Molecular mass": "155.96", 
+            },
+            "1,2-Dichloroethane": {
+                "Number of halogen atoms": "Polyhalogenated",
+                "Position in chain of halogen atoms": "Neighbors",
+                "Nature of hydrocarbonate radical": "Saturated",
+                "Reactivity in substitution reaction": "Normal reactivity",
+                "Aggregation state": "Liquid",
+                "Melting point": "-35 C",
+                "Boiling point": "84 C",
+                "Solubility in water": "0.87",
+                "Density": "1.253",
+                "Polarity": "Non-polar",
+                "Molecular mass": "98.95"
+            },
+            "2,3-Dibromobutane": {
+                "Number of halogen atoms": "Polyhalogenated",
+                "Position in chain of halogen atoms": "Neighbors",
+                "Nature of hydrocarbonate radical": "Saturated",
+                "Reactivity in substitution reaction": "Normal reactivity",
+                "Aggregation state": "",
+                "Melting point": "",
+                "Boiling point": "",
+                "Solubility in water": "",
+                "Density": "",
+                "Polarity": "Non-polar",
+                "Molecular mass": "215.91"
+            },
+            "1,2-diiodopropane": {
+                "Number of halogen atoms": "Polyhalogenated",
+                "Position in chain of halogen atoms": "Neighbors",
+                "Nature of hydrocarbonate radical": "Saturated",
+                "Reactivity in substitution reaction": "Normal reactivity",
+                "Aggregation state": "",
+                "Melting point": "",
+                "Boiling point": "",
+                "Solubility in water": "",
+                "Density": "",
+                "Polarity": "",
+                "Molecular mass": "295.89"
+            },
+            "2-chloro-propane": {
+                "Number of halogen atoms": "Monohalogenated",
+                "Position in chain of halogen atoms": "",
+                "Nature of hydrocarbonate radical": "Saturated",
+                "Reactivity in substitution reaction": "Normal reactivity",
+                "Aggregation state": "Liquid",
+                "Melting point": "",
+                "Boiling point": "",
+                "Solubility in water": "",
+                "Density": "",
+                "Polarity": "",
+                "Molecular mass": ""
+            },
+            "vinyl chloride": {
+                "Number of halogen atoms": "Monohalogenated",
+                "Position in chain of halogen atoms": "",
+                "Nature of hydrocarbonate radical": "Non-saturated",
+                "Reactivity in substitution reaction": "Low reactivity",
+                "Aggregation state": "gas",
+                "Melting point": "-153.8 C",
+                "Boiling point": "-13.4 C",
+                "Solubility in water": "2.7",
+                "Density": "0.911",
+                "Polarity": "Polar",
+                "Molecular mass": "62.50"
+            },
+            "1,1-dichloroethene": {
+                "Number of halogen atoms": "Polyhalogenated",
+                "Position in chain of halogen atoms": "Germinal",
+                "Nature of hydrocarbonate radical": "Non-saturated",
+                "Reactivity in substitution reaction": "Low reactivity",
+                "Aggregation state": "",
+                "Melting point": "-122 C",
+                "Boiling point": "32 C",
+                "Solubility in water": "2.240",
+                "Density": "1.213 g/cm3",
+                "Polarity": "",
+                "Molecular mass": "96.94"
+            },
+            "chlorobenzene": {
+                "Number of halogen atoms": "Monohalogenated",
+                "Position in chain of halogen atoms": "",
+                "Nature of hydrocarbonate radical": "Aromatic",
+                "Reactivity in substitution reaction": "Low reactivity",
+                "Aggregation state": "Liquid",
+                "Melting point": "-45.58 C",
+                "Boiling point": "131.7 C",
+                "Solubility in water": "0.05% at 20",
+                "Density": "1.11",
+                "Polarity": "Polar",
+                "Molecular mass": "112.56"
             }
-        }
+
+        },
+
+        "Allyl Chloride": {
+            "Number of halogen atoms": "Monohalogenated",
+            "Position in chain of halogen atoms": "",
+            "Nature of hydrocarbonate radical": "Non-saturated",
+            "Reactivity in substitution reaction": "High reactivity",
+            "Aggregation state": "Liquid",
+            "Melting point": "-135",
+            "Boiling point": "45C",
+            "Solubility in water": "0.36 g/100 mL (20 °C)",
+            "Density": "0.94 g/mL",
+            "Polarity": "?",
+            "Molecular mass": "76.52 "
+        },
+        "Benzyl Chloride":{
+            "Number of halogen atoms": "Monohalogenated",
+            "Position in chain of halogen atoms": "",
+            "Nature of hydrocarbonate radical": "Aromatic",
+            "Reactivity in substitution reaction": "High reactivity",
+            "Aggregation state": "Liquid",
+            "Melting point": "-39",
+            "Boiling point": "179",
+            "Solubility in water": "0.05% at 20",
+            "Density": "1.100",
+            "Polarity": "?",
+            "Molecular mass": "128.58"
+        },
+        ""
     },
     "Number of halogen atoms":[ "Monohalogenated", "Polyhalogenated"],
     "Position in chain of halogen atom":{
@@ -189,4 +307,17 @@
         }
     },
     "Nature of hydrocarbonate radical"
+
+    "Number of halogen atoms": "",
+            "Position in chain of halogen atoms": "",
+            "Nature of hydrocarbonate radical": "",
+            "Reactivity in substitution reaction": "",
+            "Aggregation state": "",
+            "Melting point": "",
+            "Boiling point": "",
+            "Solubility in water": "",
+            "Density": "",
+            "Polarity": "",
+            "Molecular mass": ""
+        }
 }
