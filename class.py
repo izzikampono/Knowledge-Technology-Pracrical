@@ -108,6 +108,8 @@ def Match(Compound,kb_name):
     return counter
 
 
+############################## MAIN ##################################
+
 
 test = Compound()
 setattr(test,'nature',"Chlorinated")
