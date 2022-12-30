@@ -32,7 +32,6 @@ class Compound():
     def initialize_possibilities(cls):
         for i in cls.fact_base:
             cls.possible_list.append(str(i["name"]))
-        #print(f"INITIALIZED : {cls.possible_list}\n")
     
     def eliminate(self):
         """" this function checks the existing attributes of the compound 

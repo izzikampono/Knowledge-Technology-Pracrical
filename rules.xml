@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<knowledge>
+    <goal name="conclusion">
+        <answer value="cannot classify"> "system cannot classify inorganic compound" </answer>
+    </goal>
+
+    <rule>
+        <description></description>
+        <if>
+            <fact name="organic">False</fact>
+        </if>
+        <then>
+            <fact name="conclusion">cannot classify</fact>
+        </then>
+    </rule>
+
+    <question>
+        <description> Does it burn in oxygen </description>
+        <option>
+           <description>yes</description>
+           <then>
+                <fact name="organic">True</fact>
+            </then>
+        </option>
+            <description>no</description>
+           <then>
+                <fact name="organic">False</fact>
+            </then>
+        <option>
+        </option>
+    </question>
+
+
+</knowledge>
