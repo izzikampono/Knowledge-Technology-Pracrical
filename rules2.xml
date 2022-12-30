@@ -1,21 +1,28 @@
-<?xml version="1.0"?>
 <knowledge>
     <goal name="conclusion">
         <answer value="cannot classify"> "system cannot classify inorganic compound" </answer>
     </goal>
 
     <factBase>
-        <fact name='organic'>True</fact>
-    </factBase>
+        <fact name="organic">True</fact>
+    <fact name="Saturated">True</fact></factBase>
 
     <rule>
-        <fact type="if" name="organic">false</fact>
-        <fact type="then" name="conclusion">cannot classify</fact>
+        <if>
+            <fact name="organic">false</fact>
+        </if>
+        <then>
+            <goal name="conclusion">cannot classify</goal>
+        </then>
     </rule>
 
     <rule>
-        <fact type="if" name="organic">true</fact>
-        <fact type="then" name="ask">true</fact>
+        <if>
+            <fact name="saturated">false</fact>
+        </if>
+        <then>
+            <goal name="happy">false</goal>
+        </then>
     </rule>
 
     <question>
