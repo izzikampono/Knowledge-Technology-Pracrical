@@ -1,6 +1,11 @@
 <knowledge>
     <goal name="conclusion">
         <answer value="cannot classify"> "system cannot classify inorganic compound" </answer>
+        <answer value="no NMR"> "System cannot determine reactivity, please perform nuclear magnetic resonance test" </answer>
+        <answer value="perform spectrometry">"System cannot determine number of halogen atoms"</answer> 
+        <answer value="weigh compound">"System cannot determine number of halogen atoms"</answer> 
+        <answer value="weigh precipitate">"System cannot determine number of halogen atoms"</answer> 
+        <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
     <factBase>
@@ -19,19 +24,31 @@
     </rule>
 
     <rule>
+        <fact type="if" name="co2">false</fact>
+        <fact type="then" name="organic">false</fact>
+    </rule>
+
+    <rule>
         <fact type="if" name="organic">false</fact>
-        <fact type="then" name="conclusion">cannot classify</fact>
+        <fact type="then" name="conclusion">cannot classify</fact> 
+    <!-- i copied this style -->
     </rule>
 
     <rule>
         <fact type="if" name="organic">true</fact>
-        <fact type="then" name="ask">true</fact>
+        <fact type="then" name="ask">true</fact> 
     </rule>
 
     <rule>
         <fact type="if" name="organic">true</fact>
         <fact type="if" name="react-silver">true</fact>
         <fact type="then" name="contain-halogen">true</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="organic">true</fact>
+        <fact type="if" name="react-silver">false</fact>
+        <fact type="then" name="conclusion">cannot classify</fact>
     </rule>
 
     <rule>
@@ -45,9 +62,67 @@
         <fact type="if" name="contain-halogen">true</fact>
         <fact type="if" name="percipitate-color">yellow-ish white</fact>
         <fact type="then" name="nature">brominated</fact>
+    </rule> 
+
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="percipitate-color">white</fact>
+        <fact type="then" name="nature">chlorinated</fact> 
     </rule>
 
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="percipitate-color">opalescent</fact>
+        <fact type="then" name="nature">fluorinated</fact>
+    </rule> 
 
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="aggregation-state">liquid</fact>
+        <fact type="then" name="state">liquid</fact>
+    </rule> 
+
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="aggregation-state">gas</fact>
+        <fact type="then" name="state">gas</fact>
+    </rule> 
+
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="aggregation-state">solid</fact>
+        <fact type="then" name="state">solid</fact>
+    </rule> 
+
+    <!-- <rule>
+        <fact type="if" name="input-mass">true</fact>
+        <fact type="then" name="molar-mass">INPUT</fact>
+    </rule> -->
+    
+    <rule>
+        <fact type="if" name="input-mass">false</fact>
+        <fact type="then" name="conclusion">perform spectrometry</fact>
+    </rule>
+<!--     
+    <rule>
+        <fact type="if" name="input-compound-weight">true</fact>
+        <fact type="then" name="compound-weight">INPUT</fact>
+    </rule> -->
+
+    <rule>
+        <fact type="if" name="input-compound-weight">false</fact>
+        <fact type="then" name="conclusion">weigh compound</fact>
+    </rule>
+<!-- 
+    <rule>
+        <fact type="if" name="input-precipitate-weight">true</fact>
+        <fact type="then" name="precipitate-weight">INPUT</fact>
+    </rule> -->
+
+    <rule>
+        <fact type="if" name="input-precipitate-weight">false</fact>
+        <fact type="then" name="precipitate-weight">weigh precipitate</fact>
+    </rule>
 
     <question>
         <description>Does it burn in oxygen?</description>
@@ -117,7 +192,210 @@
                 <fact name="percipitate-color">yellow-ish white</fact>
             </then>
         </option>
+        <option>
+            <description>opalescent</description>
+           <then>
+                <fact name="percipitate-color">opalescent</fact>
+            </then>
+        </option>
     </question>
 
+    <question>
+    <description>What is the aggregation state?</description>
+    <option> 
+        <description>liquid</description>
+        <then>
+            <fact name="aggregation-state">liquid</fact>
+        </then>
+    </option>
+    <option>
+        <description>gas</description>
+        <then>
+            <fact name="aggregation-state">gas</fact>
+        </then>
+    </option>
+    <option>
+        <description>solid</description>
+        <then>
+            <fact name="aggregation-state">solid</fact>
+        </then>
+    </option>
+    </question>
+
+
+    <question>
+        <description>Did you perform a nuclear magnetic resonance test?</description>
+            <option>
+                <description>Yes</description>
+                    <then> <fact name="NMR">true</fact> </then>
+            </option>
+            <option>
+                <description>No</description>
+                    <then> <fact name="NMR">false</fact> </then>
+            </option>
+    </question>
+    
+    <rule>
+        <fact type="if" name="NMR">false</fact>
+        <fact type="then" name="conclusion"> no NMR</fact>
+    </rule>
+
+    
+    <question>
+        <description>What type of bond is there?></description>
+            <option>
+                <description>Double bond</description>
+                    <then> <fact name="bond type">double</fact></then>
+            </option>
+                <description>Normal bond</description>
+                    <then> <fact name="bond type">normal</fact></then>
+            <option>
+            </option>
+    </question>
+
+    
+    <question>
+        <description>Is the length of the bond 1.33 angstrom?></description>
+            <option>
+                <description>yes</description>
+                    <then> <fact name="1.33```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````">true</fact></then>
+            </option>
+                <description>no</description>
+                    <then> <fact name="1.33">false</fact></then>
+            <option>
+            </option>
+    </question> 
+
+    <rule>
+        <fact type="if" name="bond type">double</fact>
+        <fact type="if" name="1.33">true</fact>
+        <fact type="then" name="reactivity">low</fact>
+    </rule> 
+
+    <question>
+        <description>Is the length of the bond 1.54 angstrom?></description>
+            <option>
+                <description>yes</description>
+                    <then> <fact name="1.54">true</fact></then>
+            </option>
+                <description>no</description>
+                    <then> <fact name="1.54">false</fact></then>
+            <option>
+            </option>
+    </question> 
+
+    <rule>
+        <fact type="if" name="bond type">normal</fact>
+        <fact type="if" name="1.54">true</fact>
+        <fact type="then" name="sp3">true</fact>
+    </rule> 
+
+    <question>
+        <description>Dis you perform a hydrogenation test?></description>
+            <option>
+                <description>yes</description>
+                    <then> <fact name="hydrogenation test">true</fact></then>
+            </option>
+                <description>no</description>
+                    <then> <fact name="hydrogenation test">false</fact></then>
+            <option>
+            </option>
+    </question> 
+
+    <rule>
+        <fact type="if" name="sp3">true</fact>
+        <fact type="if" name="hydrogenation test">false</fact>
+        <fact type="then" name="conclusion">hydrogenation state</fact>
+    </rule> 
+
+    <question>
+        <description>Did the hydrogen get consumed?></description>
+            <option>
+                <description>yes</description>
+                    <then> <fact name="saturated">false</fact></then>
+            </option>
+                <description>no</description>
+                    <then> <fact name="saturated">true</fact></then>
+            <option>
+            </option>
+    </question> 
+
+    <rule>
+        <fact type="if" name="sp3">true</fact>
+        <fact type="if" name="hydrogenation test">true</fact>
+        <fact type="if" name="saturated">true</fact>
+        <fact type="then" name="reactivity">normal reactivity</fact>
+    </rule> 
+
+        <rule>
+        <fact type="if" name="sp3">true</fact>
+        <fact type="if" name="hydrogenation test">true</fact>
+        <fact type="if" name="saturated">false</fact>
+        <fact type="then" name="reactivity">high reactivity</fact>
+    </rule> 
+
+    <question>
+        <description>Did you perform a mass spectrometry?</description>
+        <option>
+            <description>yes</description>
+            <then>
+                <fact name="input-mass">true</fact>
+            </then>
+        </option>
+        <option>
+            <description>no</description>
+            <then>
+                <fact name="input-mass">false</fact>
+            </then>
+        </option>
+    </question>
+
+    <question>
+        <description>Did you weigh the compound?</description>
+        <option>    
+            <description>yes</description>
+            <then>
+                <fact name="input-compound-weight">true</fact>
+            </then>
+        </option>
+        <option>
+            <description>no</description>
+            <then>
+                <fact name="input-compound-weight">false</fact>
+            </then>
+        </option>
+    </question>
+
+    <question>
+        <description>Did you weigh the precipitate?</description>
+        <option>    
+            <description>yes</description>
+            <then>
+                <fact name="input-precipitate-weight">true</fact>
+            </then>
+        </option>
+        <option>
+            <description>no</description>
+            <then>
+                <fact name="input-precipitate-weight">false</fact>
+            </then>
+        </option>
+    </question>
+    
+    <question>
+        <description>Did you weigh the compound?</description>
+        <option>    
+            <description>yes</description>
+            <then>
+                <fact name="input-weigh">true</fact>
+            </then>
+        </option>
+        <option>
+            <description>no</description>
+            <then>
+                <fact name="input-weigh">false</fact>
+            </then>
+        </option>
+    </question>
 
 </knowledge>
