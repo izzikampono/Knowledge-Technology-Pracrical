@@ -1,12 +1,22 @@
-<?xml version="1.0"?>
 <knowledge>
     <goal name="conclusion">
         <answer value="cannot classify"> "system cannot classify inorganic compound" </answer>
     </goal>
 
     <factBase>
-        <fact name='organic'>True</fact>
+        <fact name="organic">true</fact>
     </factBase>
+    
+    <rule>
+        <fact type="if" name="burn-oxygen">true</fact>
+        <fact type="if" name="co2">true</fact>
+        <fact type="then" name="organic">true</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="burn-oxygen">false</fact>
+        <fact type="then" name="organic">false</fact>
+    </rule>
 
     <rule>
         <fact type="if" name="organic">false</fact>
@@ -18,18 +28,93 @@
         <fact type="then" name="ask">true</fact>
     </rule>
 
+    <rule>
+        <fact type="if" name="organic">true</fact>
+        <fact type="if" name="react-silver">true</fact>
+        <fact type="then" name="contain-halogen">true</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="percipitate-color">yellow</fact>
+        <fact type="then" name="nature">iodinated</fact>
+    </rule>
+
+
+    <rule>
+        <fact type="if" name="contain-halogen">true</fact>
+        <fact type="if" name="percipitate-color">yellow-ish white</fact>
+        <fact type="then" name="nature">brominated</fact>
+    </rule>
+
+
+
     <question>
         <description>Does it burn in oxygen?</description>
         <option>
            <description>yes</description>
            <then>
-                <fact name="organic">True</fact>
+                <fact name="burn-oxygen">True</fact>
             </then>
         </option>
         <option>
             <description>no</description>
            <then>
-                <fact name="organic">False</fact>
+                <fact name="burn-oxygen">False</fact>
+            </then>
+        </option>
+    </question>
+
+    <question>
+        <description>Does it produce CO2?</description>
+        <option>
+            <description>yes</description>
+           <then>
+                <fact name="co2">true</fact>
+            </then>
+        </option>
+        <option>
+            <description> no</description>
+            <then>
+                <fact name="co2">false</fact>
+            </then>
+        </option> 
+    </question>
+
+    <question>
+        <description>Does it react to silver nitrate?</description>
+        <option>
+           <description>yes</description>
+           <then>
+                <fact name="react-silver">true</fact>
+            </then>
+        </option>
+        <option>
+            <description>no</description>
+           <then>
+                <fact name="react-silver">false</fact>
+            </then>
+        </option>
+    </question>
+
+    <question>
+        <description>What color is the precipitate?</description>
+        <option>
+           <description>white</description>
+           <then>
+                <fact name="percipitate-color">white</fact>
+            </then>
+        </option>
+        <option>
+            <description>yellow</description>
+           <then>
+                <fact name="percipitate-color">yellow</fact>
+            </then>
+        </option>
+        <option>
+            <description>yellow-ish white</description>
+           <then>
+                <fact name="percipitate-color">yellow-ish white</fact>
             </then>
         </option>
     </question>

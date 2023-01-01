@@ -5,7 +5,7 @@
 
     <factBase>
         <fact name="organic">True</fact>
-    <fact name="Saturated">True</fact></factBase>
+    <fact name="saturated">True</fact></factBase>
 
     <rule>
         <if>
