@@ -9,7 +9,7 @@
     </goal>
 
     <factBase>
-        <fact name="organic">true</fact>
+    <fact name="burn-oxygen">true</fact>
     </factBase>
     
     <rule>
@@ -31,7 +31,7 @@
     <rule>
         <fact type="if" name="organic">false</fact>
         <fact type="then" name="conclusion">cannot classify</fact> 
-    <!-- i copied this style -->
+    
     </rule>
 
     <rule>
@@ -94,49 +94,34 @@
         <fact type="then" name="state">solid</fact>
     </rule> 
 
-    <!-- <rule>
-        <fact type="if" name="input-mass">true</fact>
-        <fact type="then" name="molar-mass">INPUT</fact>
-    </rule> -->
+    
     
     <rule>
         <fact type="if" name="input-mass">false</fact>
         <fact type="then" name="conclusion">perform spectrometry</fact>
     </rule>
-<!--     
-    <rule>
-        <fact type="if" name="input-compound-weight">true</fact>
-        <fact type="then" name="compound-weight">INPUT</fact>
-    </rule> -->
+
 
     <rule>
         <fact type="if" name="input-compound-weight">false</fact>
         <fact type="then" name="conclusion">weigh compound</fact>
     </rule>
-<!-- 
-    <rule>
-        <fact type="if" name="input-precipitate-weight">true</fact>
-        <fact type="then" name="precipitate-weight">INPUT</fact>
-    </rule> -->
+
 
     <rule>
         <fact type="if" name="input-precipitate-weight">false</fact>
         <fact type="then" name="precipitate-weight">weigh precipitate</fact>
     </rule>
 
-    <question>
+    <question state="organic">
         <description>Does it burn in oxygen?</description>
         <option>
-           <description>yes</description>
-           <then>
-                <fact name="burn-oxygen">True</fact>
-            </then>
+            <description>yes</description>
+            <fact name="burn-oxygen">true</fact>
         </option>
         <option>
             <description>no</description>
-           <then>
-                <fact name="burn-oxygen">False</fact>
-            </then>
+            <fact name="burn-oxygen">False</fact>
         </option>
     </question>
 
@@ -242,7 +227,7 @@
 
     
     <question>
-        <description>What type of bond is there?></description>
+        <description>What type of bond is there?&gt;</description>
             <option>
                 <description>Double bond</description>
                     <then> <fact name="bond type">double</fact></then>
@@ -255,7 +240,7 @@
 
     
     <question>
-        <description>Is the length of the bond 1.33 angstrom?></description>
+        <description>Is the length of the bond 1.33 angstrom?&gt;</description>
             <option>
                 <description>yes</description>
                     <then> <fact name="1.33```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````">true</fact></then>
@@ -273,7 +258,7 @@
     </rule> 
 
     <question>
-        <description>Is the length of the bond 1.54 angstrom?></description>
+        <description>Is the length of the bond 1.54 angstrom?&gt;</description>
             <option>
                 <description>yes</description>
                     <then> <fact name="1.54">true</fact></then>
@@ -291,7 +276,7 @@
     </rule> 
 
     <question>
-        <description>Dis you perform a hydrogenation test?></description>
+        <description>Dis you perform a hydrogenation test?&gt;</description>
             <option>
                 <description>yes</description>
                     <then> <fact name="hydrogenation test">true</fact></then>
@@ -309,7 +294,7 @@
     </rule> 
 
     <question>
-        <description>Did the hydrogen get consumed?></description>
+        <description>Did the hydrogen get consumed?&gt;</description>
             <option>
                 <description>yes</description>
                     <then> <fact name="saturated">false</fact></then>
