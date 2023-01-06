@@ -9,8 +9,9 @@
     </goal>
 
     <factBase>
-    <fact name="burn-oxygen">true</fact>
-    </factBase>
+    <fact name="burn-oxygen">true</fact><fact name="burn-oxygen">true</fact></factBase>
+    
+     
     
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
@@ -141,12 +142,12 @@
         </option> 
     </question>
 
-    <question>
+    <question state="organic.done">
         <description>Does it react to silver nitrate?</description>
         <option>
            <description>yes</description>
            <then>
-                <fact name="react-silver">true</fact>
+                <fact name="react-silver">false</fact>
             </then>
         </option>
         <option>
