@@ -9,10 +9,8 @@
     </goal>
 
     <factBase>
-    <fact name="burn-oxygen">true</fact><fact name="burn-oxygen">true</fact></factBase>
-    
-     
-    
+    <fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="percipitate-color">yellow</fact><fact name="contain-halogen">true</fact><fact name="nature">iodinated</fact><fact name="react-silver">true</fact><fact name="react-silver">true</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="percipitate-color">white</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="percipitate-color">white</fact><fact name="input-mass">true</fact></factBase>
+
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
         <fact type="if" name="co2">true</fact>
@@ -142,12 +140,12 @@
         </option> 
     </question>
 
-    <question state="organic.done">
+    <question state="nature.next">
         <description>Does it react to silver nitrate?</description>
         <option>
            <description>yes</description>
            <then>
-                <fact name="react-silver">false</fact>
+                <fact name="react-silver">true</fact>
             </then>
         </option>
         <option>
@@ -158,7 +156,7 @@
         </option>
     </question>
 
-    <question>
+    <question state="nature">
         <description>What color is the precipitate?</description>
         <option>
            <description>white</description>
@@ -320,7 +318,7 @@
         <fact type="then" name="reactivity">high reactivity</fact>
     </rule> 
 
-    <question>
+    <question state="num_atoms">
         <description>Did you perform a mass spectrometry?</description>
         <option>
             <description>yes</description>

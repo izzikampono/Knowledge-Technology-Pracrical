@@ -1,22 +1,25 @@
 from contextlib import nullcontext
 import xml.dom.minidom
 import xml.etree.ElementTree as ET
+import sys
 
 global state,states,global_idx
-states=['organic',"nature",'conclusion']
+states=['organic',"nature","num_atoms",'conclusion']
 global_idx=0
 state=states[global_idx]
 
+# class State:
+#     states = ['organic',"nature",'conclusion']
+#     index = 0
+#     state = states[index]
 
-# def updateGoal(current_goal,goals):
-#     root =Tree.getroot()
-#     factBase=root.find('factBase')
-#     facts = factBase.findall('fact')
+#     def nextState(self):
+#         self.index+=1
+#         self.state=self.states[self.index]
 
-#     for fact in facts:
-#         if fact.attrib["name"]==current_goal:
-#             return goals[goals.index(current_goal)+1]
-#     return current_goal
+
+
+
 
 
 
@@ -29,6 +32,7 @@ def newFact(Tree,fact,name,value):
     if name=="conclusion":
         print("conclusion reached")
         state= "conclusion"
+        sys.exit("done")
         #changeState(Tree,fact.attrib["name"])
         #print()
         return
@@ -99,12 +103,12 @@ def checkRules(Tree):
                 else:
                     not_in_fb+=1
             if fact.attrib["type"]=="then":
-                #if the consequent is alr in the factbase, then we reset count to 0
-                if checkFactBase(Tree,fact.attrib["name"],fact.text):
+                #if the consequent is alr in the factbase, then we reset count to 0 so that the related question wont be called again
+                if checkFactBaseType(Tree,fact.attrib["name"]):
                     fact_count=0
         rule_count.append(fact_count)
         rule_idx+=1
-    
+    # print(rule_count)
     prioritized_rule = rules[rule_count.index(max(rule_count))]
     return prioritized_rule
 
@@ -119,7 +123,7 @@ def updateFactbase(Tree):
   
     for rule in rules:
         antecedent_count=0
-        print(f"rule number = {counter}")
+        # print(f"rule number = {counter}")
         facts = rule.findall(".//fact")
         check=0
         #doesnt implement or rule yet
@@ -130,7 +134,7 @@ def updateFactbase(Tree):
                 
 
             if check==antecedent_count and fact.attrib["type"]=="then" and checkFactBaseType(Tree,fact.attrib["name"])==False:
-                print("IN")
+                # print("IN")
                 newFact(Tree,fact,fact.attrib["name"],fact.text)
             
         counter+=1
@@ -144,18 +148,40 @@ def getInput():
         return "false"
     return
 
+def getInput2():
+    print("press number 1-4")
+    answer = input()
+    if answer=="1":
+        return 1
+    if answer=="2":
+        return 2
+    if answer=="3": 
+        return 3
+    if answer=="4":
+        return 4
+    return 0
+
+
 def askQuestion(Tree,question):
     desc = [x.text for x in question.findall(".//description")]
-    try:
-        if question.attrib["state"]!=nullcontext:
-            nextState(Tree,question)
-    except:
-        print("CANNOT CHANGE STATE")
     fact=question.find(".//fact")
     for j in desc:
         print(j)
-    fact.text=getInput()
+    if len(desc)==3:
+        fact.text=getInput()
+    else:
+        index=int(getInput2())
+        fact.text=desc[index]
     newFact(Tree,fact,fact.attrib["name"],fact.text)
+
+    try:
+        print("try to change state")
+        print(question.attrib)
+        if 'state' in question.attrib:
+            print("IN")
+            nextState(Tree,question)
+    except:
+        print("CANNOT CHANGE STATE")
     
 
 #will be used for GUI. Currently asks question in terminal and returns fact
@@ -167,17 +193,13 @@ def getQuestion(Tree,state):
     
 
     for question in questions:
-        print(question.attrib)
-        if question.attrib["state"]==state:
-            desc= [x.text for x in question.findall(".//description")]
-            fact=question.find(".//fact")
-            askQuestion(Tree,question)
-            break
+        if "state" in question.attrib:
+            if question.attrib["state"]==state:
+                desc= [x.text for x in question.findall(".//description")]
+                fact=question.find(".//fact")
+                askQuestion(Tree,question)
+                break
 
-    # for j in desc:
-    #     print(j)
-    # fact.text=getInput()
-    # newFact(Tree,fact,fact.attrib["name"],fact.text)
 
 
 
@@ -208,24 +230,45 @@ def askRelatedQuestion(Tree,rule):
 
 def nextState(Tree,question ):
     global state, states, global_idx
-    if question.attrib["state"]==state:
+    s = question.attrib["state"].split(".")
+    # print(s)
+    if question.attrib["state"]=="nature":
         global_idx+=1
         state=states[global_idx]
+        print("changed state")
+
+    if len(s)==2:
+        
+        # state = s[0]
+        global_idx+=1
+        state=states[global_idx]
+        print("changed state")
+        return
+    if question.attrib["state"]=="nature.next":
+        global_idx+=1
+        state=states[global_idx]
+    
+    return
 
 
 
 def changeState(Tree,s):
-    getQuestion(Tree,s)
     global state
-    
+    getQuestion(Tree,s)
+    print(f"state = {state}")
 
+    if s=="conclusion":
+        print(" END ")
+        return
+    
+    #change this later
     while state==s:
         updateFactbase(Tree)
         askRelatedQuestion(Tree,checkRules(Tree))
-
-    
-    
     print(state)
+    changeState(Tree,state)
+    
+  
     return
 
 
