@@ -242,7 +242,7 @@
         <description>Is the length of the bond 1.33 angstrom?&gt;</description>
             <option>
                 <description>yes</description>
-                    <then> <fact name="1.33```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````">true</fact></then>
+                    <then> <fact name="1.33">true</fact></then>
             </option>
                 <description>no</description>
                     <then> <fact name="1.33">false</fact></then>
@@ -253,6 +253,7 @@
     <rule>
         <fact type="if" name="bond type">double</fact>
         <fact type="if" name="1.33">true</fact>
+        <fact type="if" name="NMR">true</fact>
         <fact type="then" name="reactivity">low</fact>
     </rule> 
 
