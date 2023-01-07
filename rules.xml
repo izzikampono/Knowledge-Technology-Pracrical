@@ -9,7 +9,7 @@
     </goal>
 
     <factBase>
-    <fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="percipitate-color">yellow</fact><fact name="contain-halogen">true</fact><fact name="nature">iodinated</fact><fact name="react-silver">true</fact><fact name="react-silver">true</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="percipitate-color">white</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="percipitate-color">white</fact><fact name="input-mass">true</fact></factBase>
+    <fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="precipitate-color">yellow</fact><fact name="contain-halogen">true</fact><fact name="nature">iodinated</fact><fact name="react-silver">true</fact><fact name="react-silver">true</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="precipitate-color">white</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="precipitate-color">white</fact><fact name="input-mass">true</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
@@ -52,26 +52,26 @@
 
     <rule>
         <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="percipitate-color">yellow</fact>
+        <fact type="if" name="precipitate-color">yellow</fact>
         <fact type="then" name="nature">iodinated</fact>
     </rule>
 
 
     <rule>
         <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="percipitate-color">yellow-ish white</fact>
+        <fact type="if" name="precipitate-color">yellow-ish white</fact>
         <fact type="then" name="nature">brominated</fact>
     </rule> 
 
     <rule>
         <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="percipitate-color">white</fact>
+        <fact type="if" name="precipitate-color">white</fact>
         <fact type="then" name="nature">chlorinated</fact> 
     </rule>
 
     <rule>
         <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="percipitate-color">opalescent</fact>
+        <fact type="if" name="precipitate-color">opalescent</fact>
         <fact type="then" name="nature">fluorinated</fact>
     </rule> 
 
@@ -161,25 +161,25 @@
         <option>
            <description>white</description>
            <then>
-                <fact name="percipitate-color">white</fact>
+                <fact name="precipitate-color">white</fact>
             </then>
         </option>
         <option>
             <description>yellow</description>
            <then>
-                <fact name="percipitate-color">yellow</fact>
+                <fact name="precipitate-color">yellow</fact>
             </then>
         </option>
         <option>
             <description>yellow-ish white</description>
            <then>
-                <fact name="percipitate-color">yellow-ish white</fact>
+                <fact name="precipitate-color">yellow-ish white</fact>
             </then>
         </option>
         <option>
             <description>opalescent</description>
            <then>
-                <fact name="percipitate-color">opalescent</fact>
+                <fact name="precipitate-color">opalescent</fact>
             </then>
         </option>
     </question>
