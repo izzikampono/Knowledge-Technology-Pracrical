@@ -9,7 +9,7 @@
     </goal>
 
     <factBase>
-    <fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="precipitate-color">yellow</fact><fact name="contain-halogen">true</fact><fact name="nature">iodinated</fact><fact name="react-silver">true</fact><fact name="react-silver">true</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="precipitate-color">white</fact><fact name="burn-oxygen">true</fact><fact name="react-silver">true</fact><fact name="precipitate-color">white</fact><fact name="input-mass">true</fact></factBase>
+    <fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow</fact><fact name="nature">iodinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">false</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
@@ -100,10 +100,18 @@
         <fact type="then" name="conclusion">perform spectrometry</fact>
     </rule>
 
+    <rule>
+        <fact type="if" name="input-mass">true</fact>
+        <fact type="if" name="input-compound-weight">true</fact>
+        <fact type="if" name="input-precipitate-weight">true</fact>
+        <fact type="then" name="calculate-num-atoms" />
+    </rule>
+
 
     <rule>
         <fact type="if" name="input-compound-weight">false</fact>
         <fact type="then" name="conclusion">weigh compound</fact>
+        
     </rule>
 
 
@@ -161,7 +169,7 @@
         <option>
            <description>white</description>
            <then>
-                <fact name="precipitate-color">white</fact>
+                <fact name="precipitate-color">yellow</fact>
             </then>
         </option>
         <option>
@@ -184,7 +192,7 @@
         </option>
     </question>
 
-    <question>
+    <question state="agg_state">
     <description>What is the aggregation state?</description>
     <option> 
         <description>liquid</description>
@@ -207,7 +215,7 @@
     </question>
 
 
-    <question>
+    <question state="reactivity">
         <description>Did you perform a nuclear magnetic resonance test?</description>
             <option>
                 <description>Yes</description>
@@ -229,7 +237,7 @@
         <description>What type of bond is there?&gt;</description>
             <option>
                 <description>Double bond</description>
-                    <then> <fact name="bond type">double</fact></then>
+                    <then> <fact name="bond type" /></then>
             </option>
                 <description>Normal bond</description>
                     <then> <fact name="bond type">normal</fact></then>
@@ -238,7 +246,7 @@
     </question>
 
     
-    <question>
+    <question state="conclusion.next">
         <description>Is the length of the bond 1.33 angstrom?&gt;</description>
             <option>
                 <description>yes</description>
@@ -251,9 +259,9 @@
     </question> 
 
     <rule>
+        <fact type="if" name="NMR">true</fact>
         <fact type="if" name="bond type">double</fact>
         <fact type="if" name="1.33">true</fact>
-        <fact type="if" name="NMR">true</fact>
         <fact type="then" name="reactivity">low</fact>
     </rule> 
 
@@ -293,7 +301,7 @@
         <fact type="then" name="conclusion">hydrogenation state</fact>
     </rule> 
 
-    <question>
+    <question state="conclusion.next">
         <description>Did the hydrogen get consumed?&gt;</description>
             <option>
                 <description>yes</description>
@@ -331,6 +339,7 @@
             <description>no</description>
             <then>
                 <fact name="input-mass">false</fact>
+
             </then>
         </option>
     </question>
@@ -340,7 +349,7 @@
         <option>    
             <description>yes</description>
             <then>
-                <fact name="input-compound-weight">true</fact>
+                <fact name="input-compound-weight">false</fact>
             </then>
         </option>
         <option>
@@ -351,7 +360,7 @@
         </option>
     </question>
 
-    <question>
+    <question state="agg_state.next">
         <description>Did you weigh the precipitate?</description>
         <option>    
             <description>yes</description>

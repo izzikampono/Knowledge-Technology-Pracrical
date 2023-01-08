@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 import sys
 
 global state,states,global_idx
-states=['organic',"nature","num_atoms",'conclusion']
+states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
 global_idx=0
 state=states[global_idx]
 
@@ -90,7 +90,10 @@ def checkRules(Tree):
     root=Tree.getroot()
     rules=root.findall("rule")
     rule_count=[]
+    factBase=root.find("factBase")
     rule_idx=0
+    recent_fact=factBase.findall("fact")[-1]
+
     for rule in rules:
         facts = rule.findall(".//fact")
         fact_count=0
@@ -98,7 +101,9 @@ def checkRules(Tree):
         for fact in facts:
             #if we find an antecedent, we check if it is in the factbase
             if fact.attrib["type"]=="if":
-                if checkFactBase(Tree,fact.attrib["name"],fact.text):
+                if fact.attrib["name"]==recent_fact.attrib["name"] and fact.text==recent_fact.text:
+                    fact_count+=10
+                elif checkFactBase(Tree,fact.attrib["name"],fact.text):
                     fact_count+=1
                 else:
                     not_in_fb+=1
@@ -112,6 +117,34 @@ def checkRules(Tree):
     prioritized_rule = rules[rule_count.index(max(rule_count))]
     return prioritized_rule
 
+def checkRules2(Tree):
+    root=Tree.getroot()
+    rules=root.findall("rule")
+    factBase=root.find("factBase")
+    recent_fact=factBase.findall("fact")[-1]
+    rule_count=[]
+    rule_idx=0
+    for rule in rules:
+        facts = rule.findall("fact")
+        fact_count=0
+        not_in_fb=0
+        for fact in facts:
+            #if we find an antecedent, we check if it is in the factbase
+            if fact.attrib["type"]=="if" :
+
+                if fact.attrib["name"]==recent_fact.attrib["name"]:
+                    fact_count+=10
+                if checkFactBase(Tree,fact.attrib["name"],fact.text):
+                    fact_count+=1
+            if fact.attrib["type"]=="then":
+                #if the consequent is alr in the factbase, then we reset count to 0 so that the related question wont be called again
+                if checkFactBaseType(Tree,fact.attrib["name"]):
+                    fact_count=0
+        rule_count.append(fact_count)
+        rule_idx+=1
+    # print(rule_count)
+    prioritized_rule = rules[rule_count.index(max(rule_count))]
+    return prioritized_rule
 
 
 #checks facts in the factbase and sees if any of the rules can fire,
@@ -173,6 +206,7 @@ def askQuestion(Tree,question):
         index=int(getInput2())
         fact.text=desc[index]
     newFact(Tree,fact,fact.attrib["name"],fact.text)
+    updateFactbase(Tree)
 
     try:
         print("try to change state")
@@ -208,11 +242,12 @@ def getQuestion(Tree,state):
         
 # asks a question related to a fact in a rule that is not present in the FB
 def askRelatedQuestion(Tree,rule):
-
-    facts = rule.findall(".//fact")
+    print("ask related question")
+    facts = rule.findall("fact")
     for fact in facts:
-        if fact.attrib["type"]=="if" and checkFactBase(Tree,fact.attrib["name"],fact.text)==False:
-            askQuestion(Tree,findQuestion(Tree,fact))
+        if fact.attrib["type"]=="if":
+            if checkFactBaseType(Tree,fact.attrib["name"])==False:
+                askQuestion(Tree,findQuestion(Tree,fact))
     return
 
 
@@ -233,6 +268,10 @@ def nextState(Tree,question ):
     s = question.attrib["state"].split(".")
     # print(s)
     if question.attrib["state"]=="nature":
+        global_idx+=1
+        state=states[global_idx]
+        print("changed state")
+    if question.attrib["state"]=="agg_state":
         global_idx+=1
         state=states[global_idx]
         print("changed state")
@@ -262,7 +301,7 @@ def changeState(Tree,s):
         return
     
     #change this later
-    while state==s:
+    while state==s and state!="conclusion":
         updateFactbase(Tree)
         askRelatedQuestion(Tree,checkRules(Tree))
     print(state)
