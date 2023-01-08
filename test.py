@@ -2,21 +2,13 @@ from contextlib import nullcontext
 import xml.dom.minidom
 import xml.etree.ElementTree as ET
 import sys
+from compound import *
+
 
 global state,states,global_idx
 states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
 global_idx=0
 state=states[global_idx]
-
-# class State:
-#     states = ['organic',"nature",'conclusion']
-#     index = 0
-#     state = states[index]
-
-#     def nextState(self):
-#         self.index+=1
-#         self.state=self.states[self.index]
-
 
 
 
@@ -325,8 +317,18 @@ def main():
     idx=0
     state=states[0]
     changeState(Tree,"organic")
+    compound = Compound()
+
+    dict = loadFactBase(Tree)
+    compound.import_dict(dict)
+
+    pprint(vars(compound))
+    compound.eliminate()
+
+#######################################################################
 
 main()
+
 
 
 

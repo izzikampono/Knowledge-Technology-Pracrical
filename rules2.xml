@@ -4,8 +4,7 @@
     </goal>
 
     <factBase>
-        <fact name="organic">True</fact>
-    <fact name="saturated">True</fact></factBase>
+    </factBase>
 
     <rule>
         <if>
