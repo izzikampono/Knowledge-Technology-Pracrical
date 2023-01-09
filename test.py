@@ -65,9 +65,10 @@ def findQuestion(Tree,fact):
     root=Tree.getroot()
     questions=root.findall(".//question")
     for question in questions:
-        f=question.find(".//fact")
-        if f.attrib["name"]==name:
-            return question
+        facts=question.findall(".//fact")
+        for f in facts:
+            if f.attrib["name"]==name:
+                return question
 
 #filters list of nodes
 def filter(nodeList,key):
@@ -192,12 +193,18 @@ def askQuestion(Tree,question):
     fact=question.find(".//fact")
     for j in desc:
         print(j)
-    if len(desc)==3:
+    if len(desc)==3 and desc[1]!="Double bond":
         fact.text=getInput()
+        newFact(Tree,fact,fact.attrib["name"],fact.text)
+
+    elif desc[1]=="Double bond":
+        index=int(input())-1
+        facts = question.findall(".//fact")
+        newFact(Tree,fact,facts[index].attrib["name"],facts[index].text)
     else:
         index=int(getInput2())
         fact.text=desc[index]
-    newFact(Tree,fact,fact.attrib["name"],fact.text)
+        newFact(Tree,fact,fact.attrib["name"],fact.text)
     updateFactbase(Tree)
 
     try:
@@ -215,7 +222,6 @@ def askQuestion(Tree,question):
 def getQuestion(Tree,state):
     root=Tree.getroot()
     questions=root.findall("question")
-    desc=[]
     
 
     for question in questions:
@@ -239,7 +245,9 @@ def askRelatedQuestion(Tree,rule):
     for fact in facts:
         if fact.attrib["type"]=="if":
             if checkFactBaseType(Tree,fact.attrib["name"])==False:
+                print(f'ask question abt {fact.attrib["name"]}')
                 askQuestion(Tree,findQuestion(Tree,fact))
+                break
     return
 
 
@@ -317,8 +325,9 @@ def main():
     idx=0
     state=states[0]
     changeState(Tree,"organic")
-    compound = Compound()
 
+
+    compound = Compound()
     dict = loadFactBase(Tree)
     compound.import_dict(dict)
 

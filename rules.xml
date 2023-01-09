@@ -8,7 +8,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">liquid</fact><fact name="state">liquid</fact><fact name="NMR">true</fact><fact name="bond type" /><fact name="1.33">true</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow-ish white</fact><fact name="nature">brominated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">gas</fact><fact name="state">gas</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="1.54">true</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="saturation">true</fact><fact name="reactivity">normal reactivity</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
@@ -168,7 +168,7 @@
         <option>
            <description>white</description>
            <then>
-                <fact name="precipitate-color">white</fact>
+                <fact name="precipitate-color">yellow-ish white</fact>
             </then>
         </option>
         <option>
@@ -196,7 +196,7 @@
     <option> 
         <description>liquid</description>
         <then>
-            <fact name="aggregation-state">liquid</fact>
+            <fact name="aggregation-state">gas</fact>
         </then>
     </option>
     <option>
@@ -233,13 +233,13 @@
 
     
     <question>
-        <description>What type of bond is there?&gt;</description>
+        <description>What type of bond is there?</description>
             <option>
                 <description>Double bond</description>
-                    <then> <fact name="bond type" /></then>
+                    <then> <fact name="double-bond">true</fact></then>
             </option>
                 <description>Normal bond</description>
-                    <then> <fact name="bond type">normal</fact></then>
+                    <then> <fact name="normal-bond">true</fact></then>
             <option>
             </option>
     </question>
@@ -259,10 +259,19 @@
 
     <rule>
         <fact type="if" name="NMR">true</fact>
-        <fact type="if" name="bond type">double</fact>
+        <fact type="if" name="normal-bond">true</fact>
+        <fact type="if" name="1.54">true</fact>
+        <fact type="then" name="sp3">true</fact>
+    </rule> 
+
+    <rule>
+        <fact type="if" name="NMR">true</fact>
+        <fact type="if" name="double-bond">true</fact>
         <fact type="if" name="1.33">true</fact>
         <fact type="then" name="reactivity">low</fact>
     </rule> 
+
+  
 
     <question>
         <description>Is the length of the bond 1.54 angstrom?&gt;</description>
@@ -276,11 +285,7 @@
             </option>
     </question> 
 
-    <rule>
-        <fact type="if" name="bond type">normal</fact>
-        <fact type="if" name="1.54">true</fact>
-        <fact type="then" name="sp3">true</fact>
-    </rule> 
+  
 
     <question>
         <description>Dis you perform a hydrogenation test?&gt;</description>
@@ -304,7 +309,7 @@
         <description>Did the hydrogen get consumed?&gt;</description>
             <option>
                 <description>yes</description>
-                    <then> <fact name="saturation">false</fact></then>
+                    <then> <fact name="saturation">true</fact></then>
             </option>
                 <description>no</description>
                     <then> <fact name="saturation">true</fact></then>
