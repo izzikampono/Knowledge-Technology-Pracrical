@@ -202,6 +202,11 @@ def calculateNumAtoms(Tree):
         if i.attrib["name"]=="nature":
             nature=i.text
     num_atoms = molar_mass*precipitate_weight/compound_weight*( 108 + Mx[nature])#type: ignore 
+
+    if num_atoms ==1:
+        return "monohalogenated"
+    if num_atoms>1:
+        return "polyhalogenated"
     return num_atoms 
 
 #function to print out the question
@@ -238,7 +243,7 @@ def askQuestion(Tree,question):
 
         if recent_fact[0]=="input":
             print("input measurement :")
-            m = int(input())
+            m = float(input())
 
             if recent_fact[1]=="mass":
                 molar_mass=m
@@ -344,7 +349,7 @@ def nextState(Tree,question ):
     return
 
 
-
+#recursive function to run the program
 def changeState(Tree,s):
     global state
     getQuestion(Tree,s)
