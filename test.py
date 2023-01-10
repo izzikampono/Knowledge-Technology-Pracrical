@@ -5,10 +5,13 @@ import sys
 from compound import *
 
 
-global state,states,global_idx
+global state,states,global_idx, molar_mass, compound_weight, precipitate_weight
 states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
 global_idx=0
 state=states[global_idx]
+molar_mass=0
+compound_weight=0
+precipitate_weight=0
 
 
 
@@ -187,7 +190,22 @@ def getInput2():
         return 4
     return 0
 
+def calculateNumAtoms(Tree):
+    Mx={"flourinated":19,"brominated":80,"iodinated":127,"chlorinated":35.5}
+    global molar_mass, compound_weight, precipitate_weight
 
+    root = Tree.getroot()
+    fb = root.find("factBase")
+    facts = fb.findall("fact")
+
+    for i in facts:
+        if i.attrib["name"]=="nature":
+            nature=i.text
+    num_atoms = molar_mass*precipitate_weight/compound_weight*( 108 + Mx[nature])#type: ignore 
+    return num_atoms 
+
+#function to print out the question
+#also contains if statements for a number of unique questions 
 def askQuestion(Tree,question):
     desc = [x.text for x in question.findall(".//description")]
     fact=question.find(".//fact")
@@ -205,16 +223,52 @@ def askQuestion(Tree,question):
         index=int(getInput2())
         fact.text=desc[index]
         newFact(Tree,fact,fact.attrib["name"],fact.text)
+
+        
+   
+    #checks if latest fact requires user to input mass/weight
+    root=Tree.getroot()
+    fb=root.find("factBase")
+
+    global precipitate_weight, molar_mass, compound_weight
+
+    try:
+        recent_fact = fb.findall("fact")[-1]
+        recent_fact=recent_fact.attrib["name"].split("-")
+
+        if recent_fact[0]=="input":
+            print("input measurement :")
+            m = int(input())
+
+            if recent_fact[1]=="mass":
+                molar_mass=m
+            elif recent_fact[1]=="compound":
+                compound_weight=m
+            elif recent_fact[1]=="precipitate":
+                precipitate_weight = m
+            
+            if precipitate_weight!=0:
+                mm = calculateNumAtoms(Tree)
+                fact = ET.Element("fact")
+                newFact(Tree,fact,"num_atoms",str(mm))
+    except:
+        print("error for first fact in FB")
+    
+    
+
+
+
     updateFactbase(Tree)
+
 
     try:
         print("try to change state")
-        print(question.attrib)
+        # print(question.attrib)
         if 'state' in question.attrib:
-            print("IN")
+            # print("IN")
             nextState(Tree,question)
     except:
-        print("CANNOT CHANGE STATE")
+         print("CANNOT CHANGE STATE")
     
 
 #will be used for GUI. Currently asks question in terminal and returns fact
@@ -245,7 +299,7 @@ def askRelatedQuestion(Tree,rule):
     for fact in facts:
         if fact.attrib["type"]=="if":
             if checkFactBaseType(Tree,fact.attrib["name"])==False:
-                print(f'ask question abt {fact.attrib["name"]}')
+                # print(f'ask question abt {fact.attrib["name"]}')
                 askQuestion(Tree,findQuestion(Tree,fact))
                 break
     return
@@ -270,11 +324,11 @@ def nextState(Tree,question ):
     if question.attrib["state"]=="nature":
         global_idx+=1
         state=states[global_idx]
-        print("changed state")
+        # print("changed state")
     if question.attrib["state"]=="agg_state":
         global_idx+=1
         state=states[global_idx]
-        print("changed state")
+        # print("changed state")
 
     if len(s)==2:
         

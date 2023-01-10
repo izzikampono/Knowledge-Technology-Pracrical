@@ -8,8 +8,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow-ish white</fact><fact name="nature">brominated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">gas</fact><fact name="state">gas</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="1.54">true</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="saturation">true</fact><fact name="reactivity">normal reactivity</fact></factBase>
-
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow</fact><fact name="nature">iodinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">11750.0</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">liquid</fact><fact name="state">liquid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="1.33">true</fact><fact name="reactivity">low</fact></factBase>
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
         <fact type="if" name="co2">true</fact>
@@ -168,7 +167,7 @@
         <option>
            <description>white</description>
            <then>
-                <fact name="precipitate-color">yellow-ish white</fact>
+                <fact name="precipitate-color">yellow</fact>
             </then>
         </option>
         <option>
@@ -196,7 +195,7 @@
     <option> 
         <description>liquid</description>
         <then>
-            <fact name="aggregation-state">gas</fact>
+            <fact name="aggregation-state">liquid</fact>
         </then>
     </option>
     <option>
