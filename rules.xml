@@ -49,6 +49,11 @@
     </rule>
 
     <rule>
+        <fact type="if" name="num_atoms"> monohalogenated </fact>
+        <fact type="then" name="position"> false </fact>
+    </rule>
+
+    <rule>
         <fact type="if" name="contain-halogen">true</fact>
         <fact type="if" name="precipitate-color">yellow</fact>
         <fact type="then" name="nature">iodinated</fact>

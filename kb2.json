@@ -2,120 +2,108 @@
      {  "name" : "tetrafluoromethane",
         "nature": "fluorate",
         "num_atoms" : "polyhalogenated",
-        "position" : "germinal",
+        "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "gas",
-        "polarity" : "non-polar"
+        "state" : "gas"
     } ,
     {
         "name": "difluoromethane",
         "nature" : "fluorate",
         "num_atoms" : "polyhalogenated",
-        "position" : "germinal",
+        "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "gas",
-        "polarity": "polar"
+        "state" : "gas"
     },
     {
         "name" : "ethyl fluoride",
         "nature" : "fluorate",
         "num_atoms": "monohalogenated",
-        "position": "any",
+        "position": "false",
         "saturation" : "true",
         "reactivity": "normal",
-        "state": "gas",
-        "polarity": "polar"
+        "state": "gas"
     },
     {   "name" : "chloromethane",
         "nature" : "chlorinated",
         "num_atoms" : " monohalogenated",
-        "position" : "true",
+        "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state": "gas",
-        "polarity": "polar"
+        "state": "gas"
     },
     {
         "name": "trichloromethane",
         "nature":"chlorinated",
-        "num_atoms": "?",
-        "position": "germinal",
+        "num_atoms": "polyhalogenated",
+        "position": "geminal",
         "saturation": "true",
         "reactivity": "normal",
-        "state": "liquid",
-        "polarity": "non-polar"
+        "state": "liquid"
     },
     {
         "name" : "ethyl chloride",
         "nature" : "chlorinated",
         "num_atoms" : "monohalogenated",
-        "position" : "germinal",
+        "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "gas",
-        "polarity": "polar"
+        "state" : "gas"
     },
     {
         "name" : "propyl bromide",
         "nature" : "brominated",
         "num_atoms" : "monohalogenated",
-        "position" : "?",
+        "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "?"
+        "state" : "liquid"
     },
     {
         "name" : "bromobenzene",
         "nature" : "brominated",
         "num_atoms" : "monohalogenated",
-        "position" : "?",
+        "position" : "false",
         "saturation" : "aromatic",
         "reactivity" : "low",
-        "state" : "liquid",
-        "polarity" : "polar"
+        "state" : "liquid"
     },
     {
         "name" : "ethyl bromide",
         "nature" : "brominated",
         "num_atoms" : "monohalogenated",
-        "position" : "?",
-        "saturation" : "?",
+        "position" : "false",
+        "saturation" : "saturated",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "polar"
+        "state" : "liquid"
     },
     {
         "name" : "dibromoethane",
         "nature" : "brominated",
         "num_atoms" : "polyhalogenated",
-        "position" : "germinal",
+        "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "polar"
+        "state" : "liquid"
     },
     {
         "name" : "diiodomethane",
         "nature" : "iodinated",
-        "num_atoms" : "?",
-        "position" : "germinal",
+        "num_atoms" : "polyhalogenated",
+        "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "non-polar"
+        "state" : "liquid"
     },
     {
         "name" : "ethyl iodide",
         "nature" : "iodinated",
         "num_atoms" : "monohalogenated",
-        "position" : "germinal",
+        "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "non-polar"
+        "state" : "liquid"
     },
     {
         "name" : "1,2-dichloroethane",
@@ -124,8 +112,7 @@
         "position" : "neighbors",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "non-polar"
+        "state" : "liquid"
     },
     {
         "name" : "2,3-dibromobutane",
@@ -134,8 +121,7 @@
         "position" : "neighbors",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "?",
-        "polarity" : "non-polar"
+        "state" : "liquid"
     },
     {
         "name" : "1,2-diiodopropane",
@@ -144,65 +130,57 @@
         "position" : "neighbors",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "?",
-        "polarity" : ""
+        "state" : "liquid"
     },
-    
     {
         "name" : "2-chloro-propane",
         "nature" : "iodinated",
         "num_atoms" : "monohalogenated",
-        "position" : "?",
+        "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid",
-        "polarity" : "non-polar"
+        "state" : "liquid"
     },
     {  "name" : "vynil chloride",
         "nature": "iodinated",
         "num_atoms" : "monohalogenated",
-        "position" : "?",
+        "position" : "false",
         "saturation" : "false",
         "reactivity" : "low",
-        "state" : "gas",
-        "polarity" : "polar"
+        "state" : "gas"
     } ,
     {  "name" : "1,1-dichloroethene",
         "nature": "iodinated",
         "num_atoms" : "polyhalogenated",
-        "position" : "germinal",
+        "position" : "geminal",
         "saturation" : "false",
         "reactivity" : "low",
-        "state" : "?",
-        "polarity" : "?"
+        "state" : "liquid"
     } ,
 
     {  "name" : "benzyl chloride",
         "nature": "chlorinated",
         "num_atoms" : "monohalogenated",
-        "position" : "",
+        "position" : "false",
         "saturation" : "aromatic",
         "reactivity" : "high",
-        "state" : "liquid",
-        "polarity" : ""
+        "state" : "liquid"
     } ,
     {  "name" : "allyl chloride",
         "nature": "chlorinated",
         "num_atoms" : "monohalogenated",
-        "position" : "",
+        "position" : "false",
         "saturation" : "false",
         "reactivity" : "high",
-        "state" : "liquid",
-        "polarity" : ""
+        "state" : "liquid"
     } ,
     {  "name" : "chlorobenzene",
         "nature": "chlorinated",
         "num_atoms" : "monohalogenated",
-        "position" : "",
+        "position" : "false",
         "saturation" : "aromatic",
         "reactivity" : "low",
-        "state" : "liquid",
-        "polarity" : "polar"
+        "state" : "liquid"
     }      
     
     

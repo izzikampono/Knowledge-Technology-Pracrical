@@ -78,9 +78,9 @@ def getQuestionState(Tree,state):
 #         options_facts[i]=j
         
 #################################################################
-Tree = ET.parse("rules.xml")
-root =Tree.getroot()
-root.find("question")
-
-makeDictionaryBool(root.findall("question")[4])
+# Tree = ET.parse("rules.xml")
+# root =Tree.getroot()
+# root.find("question")
+#
+# makeDictionaryBool(root.findall("question")[4])
 
