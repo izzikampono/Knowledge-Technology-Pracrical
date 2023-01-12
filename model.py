@@ -20,6 +20,7 @@ def reset(Tree):
 
     for elem in fb.iter():
         if elem.tag=="fact":
+            print("in here")
             fb.remove(elem)
     return
 
@@ -396,6 +397,7 @@ def changeState(Tree,s):
 def main():
     Tree = ET.parse("rules.xml")
     root =Tree.getroot()
+    reset(Tree)
 
     tag=root.tag
 
