@@ -8,7 +8,8 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">liquid</fact><fact name="state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test" /></factBase>
+    <factBase/>
+
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
         <fact type="if" name="co2">true</fact>
@@ -309,7 +310,7 @@
         <description>Dis you perform a hydrogenation test?&gt;</description>
             <option>
                 <description>yes</description>
-                    <then> <fact name="hydrogenation test">true </fact></then>
+                    <then> <fact name="hydrogenation test">true</fact></then>
             </option>
                 <description>no</description>
                     <then> <fact name="hydrogenation test">false</fact></then>
@@ -327,7 +328,7 @@
         <description>Did the hydrogen get consumed?&gt;</description>
             <option>
                 <description>yes</description>
-                    <then> <fact name="hydrogen-consumed">true</fact></then>
+                    <then> <fact name="hydrogen-consumed">false</fact></then>
             </option>
                 <description>no</description>
                     <then> <fact name="hydrogen-consumed">false</fact></then>
@@ -366,7 +367,7 @@
         <option>
             <description>yes</description>
             <then>
-                <fact name="input-mass">true</fact>
+                <fact name="input-mass">false</fact>
             </then>
         </option>
         <option>

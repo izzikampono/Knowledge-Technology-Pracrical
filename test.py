@@ -14,6 +14,14 @@ compound_weight=0
 precipitate_weight=0
 
 
+def reset(Tree):
+    root=Tree.getroot()
+    fb=root.find("factBase")
+
+    for elem in fb.iter():
+        if elem.tag=="fact":
+            fb.remove(elem)
+    return
 
 
 
@@ -26,8 +34,13 @@ def newFact(Tree,fact,name,value):
 
     if name=="conclusion":
         print("conclusion reached")
-        state= "conclusion"
-        sys.exit("done")
+        if value == "cannot classify":
+            print("system cannot classify the compound")
+            sys.exit("done")
+        next(Tree)
+        changeState(Tree,state)
+        #state= "conclusion"
+        #sys.exit("done")
         #changeState(Tree,fact.attrib["name"])
         #print()
         return
@@ -37,6 +50,7 @@ def newFact(Tree,fact,name,value):
     newElement.text=value
     print(f'ADDED NEW FACT == {newElement.attrib["name"]}')
     Tree.write("rules.xml")
+    updateFactbase(Tree)
 
 
 def checkFactBaseType(Tree,name):
@@ -312,7 +326,12 @@ def askRelatedQuestion(Tree,rule):
 
 
     
-
+def next(Tree):
+    global state,states,global_idx
+    global_idx+=1
+    state=states[global_idx]
+    return 
+    
 
 
 
@@ -356,6 +375,7 @@ def changeState(Tree,s):
     print(f"state = {state}")
 
     if s=="conclusion":
+
         print("===== END =====")
         return
     
