@@ -7,7 +7,9 @@ from compound import *
 
 
 global state,states,global_idx, molar_mass, compound_weight, precipitate_weight
+global current_question
 states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
+current_question = None
 global_idx=0
 state=states[global_idx]
 molar_mass=0
@@ -301,6 +303,7 @@ def askQuestion(Tree,question):
 #will be used for GUI. Currently asks question in terminal and returns fact
 #asks question with a specific state
 def getQuestion(Tree,state):
+    global current_question
     root=Tree.getroot()
     questions=root.findall("question")
     
@@ -310,7 +313,9 @@ def getQuestion(Tree,state):
             if question.attrib["state"]==state:
                 desc= [x.text for x in question.findall(".//description")]
                 fact=question.find(".//fact")
+                current_question=question
                 askQuestion(Tree,question)
+
                 break
 
 
