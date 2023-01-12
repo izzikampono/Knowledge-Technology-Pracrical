@@ -2,6 +2,7 @@ from contextlib import nullcontext
 import xml.dom.minidom
 import xml.etree.ElementTree as ET
 import sys
+
 from compound import *
 
 
@@ -17,11 +18,17 @@ precipitate_weight=0
 def reset(Tree):
     root=Tree.getroot()
     fb=root.find("factBase")
+    # iterator=fb.getiterator("fact")
 
-    for elem in fb.iter():
-        if elem.tag=="fact":
-            print("in here")
-            fb.remove(elem)
+    for fact in fb.findall("fact") :
+       fb.remove(fact)
+
+
+    # for parent in root.findall('.//fact/..'):
+    # # Find each weight element
+    #     for element in parent.findall('fact'):
+    #         # Remove the weight element from its parent element
+    #         parent.remove(element)
     return
 
 
