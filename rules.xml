@@ -8,7 +8,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="ask">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">liquid</fact><fact name="state">liquid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="1.33">true</fact><fact name="reactivity">low</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="calculate-num-atoms" /><fact name="aggregation-state">liquid</fact><fact name="state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test" /></factBase>
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
         <fact type="if" name="co2">true</fact>
@@ -31,10 +31,6 @@
     
     </rule>
 
-    <rule>
-        <fact type="if" name="organic">true</fact>
-        <fact type="then" name="ask">true</fact> 
-    </rule>
 
     <rule>
         <fact type="if" name="organic">true</fact>
@@ -232,9 +228,10 @@
     
     <rule>
         <fact type="if" name="NMR">false</fact>
-        <fact type="then" name="conclusion"> no NMR</fact>
+        <fact type="then" name="conclusion">no NMR</fact>
     </rule>
 
+  
     
     <question>
         <description>What type of bond is there?</description>
@@ -249,43 +246,60 @@
     </question>
 
     
-    <question state="conclusion.next">
-        <description>Is the length of the bond 1.33 angstrom?&gt;</description>
-            <option>
-                <description>yes</description>
-                    <then> <fact name="1.33">true</fact></then>
-            </option>
-                <description>no</description>
-                    <then> <fact name="1.33">false</fact></then>
-            <option>
-            </option>
-    </question> 
+    
 
     <rule>
         <fact type="if" name="NMR">true</fact>
         <fact type="if" name="normal-bond">true</fact>
-        <fact type="if" name="1.54">true</fact>
+        <fact type="if" name="bond-length">1.54</fact>
         <fact type="then" name="sp3">true</fact>
     </rule> 
 
     <rule>
         <fact type="if" name="NMR">true</fact>
         <fact type="if" name="double-bond">true</fact>
-        <fact type="if" name="1.33">true</fact>
+        <fact type="if" name="bond-length">1.33</fact>
+        <fact type="then" name="sp2">true</fact>
         <fact type="then" name="reactivity">low</fact>
     </rule> 
 
+    <rule>
+        <fact type="if" name="double-bond">true</fact>
+        <fact type="if" name="bond-length">1.33</fact>
+        <fact type="then" name="conclusion">no way</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="double-bond">true</fact>
+        <fact type="if" name="bond-length">1.39</fact>
+        <fact type="then" name="conclusion">no way</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="bond-length">1.39</fact>
+        <fact type="then" name="saturation">aromatic</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="saturation">aromatic</fact>
+        <fact type="then" name="reactivity">low</fact>
+
+    </rule>
   
 
     <question>
-        <description>Is the length of the bond 1.54 angstrom?&gt;</description>
+        <description>what is the length of the bond? (unit : angstrom) &gt;</description>
             <option>
-                <description>yes</description>
-                    <then> <fact name="1.54">true</fact></then>
+                <description>1.54</description>
+                    <then> <fact name="bond-length">1.54</fact></then>
             </option>
-                <description>no</description>
-                    <then> <fact name="1.54">false</fact></then>
             <option>
+                <description>1.39</description>
+                    <then> <fact name="bond-length">1.39</fact></then>
+            </option>
+            <option>
+                <description>1.33</description>
+                    <then> <fact name="bond-length">1.33</fact></then>
             </option>
     </question> 
 
@@ -295,7 +309,7 @@
         <description>Dis you perform a hydrogenation test?&gt;</description>
             <option>
                 <description>yes</description>
-                    <then> <fact name="hydrogenation test">true</fact></then>
+                    <then> <fact name="hydrogenation test">true </fact></then>
             </option>
                 <description>no</description>
                     <then> <fact name="hydrogenation test">false</fact></then>
@@ -313,10 +327,10 @@
         <description>Did the hydrogen get consumed?&gt;</description>
             <option>
                 <description>yes</description>
-                    <then> <fact name="saturation">false</fact></then>
+                    <then> <fact name="hydrogen-consumed">true</fact></then>
             </option>
                 <description>no</description>
-                    <then> <fact name="saturation">true</fact></then>
+                    <then> <fact name="hydrogen-consumed">false</fact></then>
             <option>
             </option>
     </question> 
@@ -324,15 +338,27 @@
     <rule>
         <fact type="if" name="sp3">true</fact>
         <fact type="if" name="hydrogenation test">true</fact>
-        <fact type="if" name="saturation">true</fact>
-        <fact type="then" name="reactivity">normal reactivity</fact>
+        <fact type="if" name="hydrogen-consumed">false</fact>
+        <fact type="then" name="saturation">true</fact>
     </rule> 
 
-        <rule>
+    <rule>
+        <fact type="if" name="saturation">true</fact>
+        <fact type="then" name="reactivity">normal</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="sp3">true</fact>
+        <fact type="if" name="hydrogenation test">true</fact>
+        <fact type="if" name="saturation">true</fact>
+        <fact type="then" name="reactivity">normal</fact>
+    </rule> 
+
+    <rule>
         <fact type="if" name="sp3">true</fact>
         <fact type="if" name="hydrogenation test">true</fact>
         <fact type="if" name="saturation">false</fact>
-        <fact type="then" name="reactivity">high reactivity</fact>
+        <fact type="then" name="reactivity">high</fact>
     </rule> 
 
     <question state="num_atoms">

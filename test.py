@@ -162,7 +162,7 @@ def updateFactbase(Tree):
                 check+=checkFactBase(Tree,fact.attrib["name"],fact.text)
                 
 
-            if check==antecedent_count and fact.attrib["type"]=="then" and checkFactBaseType(Tree,fact.attrib["name"])==False:
+            if check==antecedent_count and fact.attrib["type"]=="then" and checkFactBase(Tree,fact.attrib["name"],fact.text)==False:
                 # print("IN")
                 newFact(Tree,fact,fact.attrib["name"],fact.text)
             
@@ -356,7 +356,7 @@ def changeState(Tree,s):
     print(f"state = {state}")
 
     if s=="conclusion":
-        print(" END ")
+        print("===== END =====")
         return
     
     #change this later
