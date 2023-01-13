@@ -138,6 +138,10 @@ def checkRules(Tree):
     prioritized_rule = rules[rule_count.index(max(rule_count))]
     return prioritized_rule
 
+def getCurrentQuestion():
+    global current_question
+    return current_question
+
 def checkRules2(Tree):
     root=Tree.getroot()
     rules=root.findall("rule")
@@ -259,6 +263,8 @@ def askQuestion(Tree,question):
     #checks if latest fact requires user to input mass/weight
     root=Tree.getroot()
     fb=root.find("factBase")
+
+    
 
     global precipitate_weight, molar_mass, compound_weight
 
