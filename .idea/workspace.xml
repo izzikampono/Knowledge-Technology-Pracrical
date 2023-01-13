@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81c19ee7-9302-479f-88fa-fcd5159b84c3" name="Changes" comment="newwww">
-      <change beforePath="$PROJECT_DIR$/guiTry.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiTry.py" afterDir="false" />
-    </list>
-    <list id="229e238a-fe41-42b5-81c6-cfc22f72b5ba" name="Changes by amaynda" comment="">
-      <change beforePath="$PROJECT_DIR$/guiTry.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiTry.py" afterDir="false" />
-    </list>
+    <list default="true" id="81c19ee7-9302-479f-88fa-fcd5159b84c3" name="Changes" comment="idkk" />
+    <list id="229e238a-fe41-42b5-81c6-cfc22f72b5ba" name="Changes by amaynda" comment="Changes by amaynda" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,38 +21,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/guiTry.py">
-      <ranges>
-        <range start1="1" end1="3" start2="1" end2="4" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="5" end1="5" start2="6" end2="8" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="15" end1="16" start2="18" end2="20" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="30" end1="30" start2="34" end2="38" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="51" end1="53" start2="59" end2="61" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="55" end1="57" start2="63" end2="64" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="58" end1="59" start2="65" end2="66" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="66" end1="67" start2="73" end2="73" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="69" end1="72" start2="75" end2="77" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="81" end1="83" start2="86" end2="88" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="84" end1="85" start2="89" end2="90" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="95" end1="96" start2="100" end2="100" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="97" end1="101" start2="101" end2="105" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="114" end1="116" start2="118" end2="120" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="117" end1="118" start2="121" end2="122" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="127" end1="127" start2="131" end2="144" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="128" end1="128" start2="145" end2="146" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="129" end1="147" start2="147" end2="151" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="151" end1="151" start2="155" end2="166" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="152" end1="153" start2="167" end2="168" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="155" end1="156" start2="170" end2="170" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
-        <range start1="178" end1="179" start2="192" end2="193" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="225" end1="225" start2="239" end2="240" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="226" end1="226" start2="241" end2="242" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="227" end1="227" start2="243" end2="244" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-        <range start1="243" end1="244" start2="260" end2="264" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -160,7 +124,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673518879444</updated>
-      <workItem from="1673613273322" duration="12938000" />
+      <workItem from="1673613273322" duration="13294000" />
     </task>
     <task id="LOCAL-00001" summary="gui better but not done">
       <created>1673614875698</created>
@@ -183,7 +147,42 @@
       <option name="project" value="LOCAL" />
       <updated>1673617632961</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="shit workssssss">
+      <created>1673630916785</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1673630916785</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Changes by amaynda">
+      <created>1673630941757</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673630941757</updated>
+    </task>
+    <task id="LOCAL-00006" summary="idkk">
+      <created>1673631022980</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1673631022980</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changes by amaynda">
+      <created>1673631186854</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1673631186854</updated>
+    </task>
+    <task id="LOCAL-00008" summary="idkk">
+      <created>1673631203573</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1673631203573</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,10 +203,13 @@
     <MESSAGE value="gui better but not done" />
     <MESSAGE value="gui better" />
     <MESSAGE value="newwww" />
-    <option name="LAST_COMMIT_MESSAGE" value="newwww" />
+    <MESSAGE value="shit workssssss" />
+    <MESSAGE value="Changes by amaynda" />
+    <MESSAGE value="idkk" />
+    <option name="LAST_COMMIT_MESSAGE" value="idkk" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/KTP$text_input.coverage" NAME="text_input Coverage Results" MODIFIED="1673626314832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/KTP$guiTry.coverage" NAME="guiTry Coverage Results" MODIFIED="1673630212305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KTP$guiTry.coverage" NAME="guiTry Coverage Results" MODIFIED="1673631118209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
