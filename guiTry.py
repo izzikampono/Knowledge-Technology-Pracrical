@@ -107,16 +107,15 @@ def frame1():
 
 def frame2():
     # question widget
-    question = QLabel("Question")
+    question = QLabel("QUESTION")
     question.setAlignment(QtCore.Qt.AlignCenter)
     question.setWordWrap(True)
     question.setStyleSheet(
-        '''
-        font-family: Shanti;
-        font-size: 25px;"
-        color: 'white';"
-        padding: 75px;
-        '''
+        "font-family: Shanti;" +
+        "font-size: 25px;" +
+        "color: 'white';" +
+        "padding: 75px;"
+
     )
     widgets["question"].append(question)
 
