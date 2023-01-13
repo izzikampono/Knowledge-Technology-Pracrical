@@ -320,11 +320,8 @@ def getQuestion(Tree,state):
     for question in questions:
         if "state" in question.attrib:
             if question.attrib["state"]==state:
-                desc= [x.text for x in question.findall(".//description")]
-                fact=question.find(".//fact")
                 current_question=question
-                askQuestion(Tree,question)
-
+                return question
                 break
 
 
@@ -396,8 +393,9 @@ def nextState(Tree,question ):
 
 #recursive function to run the program
 def changeState(Tree,s):
-    global state
-    getQuestion(Tree,s)
+    global state,current_question
+    current_question = getQuestion(Tree,s)
+    askQuestion(Tree,current_question)
     print(f"state = {state}")
 
     if s=="conclusion":
@@ -419,7 +417,7 @@ def changeState(Tree,s):
     
 
 
-def main():
+def start():
     Tree = ET.parse("rules.xml")
     root =Tree.getroot()
     reset(Tree)
@@ -431,8 +429,11 @@ def main():
     idx=0
     state=states[0]
     changeState(Tree,"organic")
+    return
 
 
+def system_output():
+    Tree = ET.parse("rules.xml")
     compound = Compound()
     dict = loadFactBase(Tree)
     compound.import_dict(dict)
@@ -442,7 +443,6 @@ def main():
 
 #######################################################################
 
-main()
 
 
 
