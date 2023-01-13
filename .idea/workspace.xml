@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81c19ee7-9302-479f-88fa-fcd5159b84c3" name="Changes" comment="newwww">
+      <change beforePath="$PROJECT_DIR$/guiTry.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiTry.py" afterDir="false" />
+    </list>
+    <list id="229e238a-fe41-42b5-81c6-cfc22f72b5ba" name="Changes by amaynda" comment="">
+      <change beforePath="$PROJECT_DIR$/guiTry.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiTry.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/guiTry.py">
+      <ranges>
+        <range start1="1" end1="3" start2="1" end2="4" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="5" end1="5" start2="6" end2="8" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="15" end1="16" start2="18" end2="20" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="30" end1="30" start2="34" end2="38" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="51" end1="53" start2="59" end2="61" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="55" end1="57" start2="63" end2="64" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="58" end1="59" start2="65" end2="66" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="66" end1="67" start2="73" end2="73" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="69" end1="72" start2="75" end2="77" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="81" end1="83" start2="86" end2="88" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="84" end1="85" start2="89" end2="90" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="95" end1="96" start2="100" end2="100" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="97" end1="101" start2="101" end2="105" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="114" end1="116" start2="118" end2="120" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="117" end1="118" start2="121" end2="122" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="127" end1="127" start2="131" end2="144" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="128" end1="128" start2="145" end2="146" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="129" end1="147" start2="147" end2="151" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="151" end1="151" start2="155" end2="166" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="152" end1="153" start2="167" end2="168" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="155" end1="156" start2="170" end2="170" changelist="81c19ee7-9302-479f-88fa-fcd5159b84c3" />
+        <range start1="178" end1="179" start2="192" end2="193" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="225" end1="225" start2="239" end2="240" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="226" end1="226" start2="241" end2="242" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="227" end1="227" start2="243" end2="244" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+        <range start1="243" end1="244" start2="260" end2="264" changelist="229e238a-fe41-42b5-81c6-cfc22f72b5ba" />
+      </ranges>
+    </file>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2KDpC0D81UKWLoB4FMdMhUBRIoT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Python.guiTry">
+    <configuration name="guiTry" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KTP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guiTry.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\ropot\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="text_input" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KTP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/text_input.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.guiTry" />
+        <item itemvalue="Python.text_input" />
+        <item itemvalue="Python.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81c19ee7-9302-479f-88fa-fcd5159b84c3" name="Changes" comment="" />
+      <created>1673518879444</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673518879444</updated>
+      <workItem from="1673613273322" duration="12938000" />
+    </task>
+    <task id="LOCAL-00001" summary="gui better but not done">
+      <created>1673614875698</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673614875698</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gui better">
+      <created>1673615286671</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673615286671</updated>
+    </task>
+    <task id="LOCAL-00003" summary="newwww">
+      <created>1673617632961</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1673617632961</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="gui better but not done" />
+    <MESSAGE value="gui better" />
+    <MESSAGE value="newwww" />
+    <option name="LAST_COMMIT_MESSAGE" value="newwww" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/KTP$text_input.coverage" NAME="text_input Coverage Results" MODIFIED="1673626314832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KTP$guiTry.coverage" NAME="guiTry Coverage Results" MODIFIED="1673630212305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
