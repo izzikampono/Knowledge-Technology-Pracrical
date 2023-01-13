@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWid
 from PyQt5.QtGui import QPixmap, QIntValidator, QFont, QDoubleValidator
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QCursor
+import xml.etree.ElementTree as et
+import utils
 
 # from PyQt5 import *
 
@@ -14,7 +16,8 @@ widgets = {
     "answer1": [],
     "answer2": [],
     "answer3": [],
-    "answer4": []
+    "answer4": [],
+    "text": []
 }
 
 # initiallize GUI application
@@ -29,6 +32,10 @@ window.setStyleSheet("background: #161219;")
 
 # #initialliza grid layout
 grid = QGridLayout()
+
+Tree = et.parse("rules.xml")
+root = Tree.getroot()
+current_question = root.find("question")
 
 
 def clear_widgets():
@@ -54,10 +61,9 @@ def start():
     next_question_frame()
 
 
-def frame_button2():
-    clear_widgets()
+def show_frame_button2(que, l):
     # question widget
-    question = QLabel("QUESTION2button")
+    question = QLabel(que)
     question.setAlignment(QtCore.Qt.AlignCenter)
     question.setWordWrap(True)
     question.setStyleSheet(
@@ -65,12 +71,10 @@ def frame_button2():
         "font-size: 25px;" +
         "color: 'white';" +
         "padding: 75px;"
-
     )
     widgets["question"].append(question)
-    create_buttons()
-    button1 = create_buttons("answer1", 85, 5)
-    button2 = create_buttons("answer2", 5, 85)
+    button1 = create_buttons(l[1], 85, 5)
+    button2 = create_buttons(l[2], 5, 85)
 
     widgets["answer1"].append(button1)
     widgets["answer2"].append(button2)
@@ -80,10 +84,10 @@ def frame_button2():
     grid.addWidget(widgets["answer1"][-1], 2, 0)
     grid.addWidget(widgets["answer2"][-1], 2, 1)
 
-def frame_button4():
-    clear_widgets()
+
+def show_frame_button4(question, l):
     # question widget
-    question = QLabel("QUESTION4button")
+    question = QLabel(question)
     question.setAlignment(QtCore.Qt.AlignCenter)
     question.setWordWrap(True)
     question.setStyleSheet(
@@ -94,12 +98,11 @@ def frame_button4():
 
     )
     widgets["question"].append(question)
-    create_buttons()
     # answer button widgets
-    button1 = create_buttons("answer1", 85, 5)
-    button2 = create_buttons("answer2", 5, 85)
-    button3 = create_buttons("answer3", 85, 5)
-    button4 = create_buttons("answer4", 5, 85)
+    button1 = create_buttons(l[1], 85, 5)
+    button2 = create_buttons(l[2], 5, 85)
+    button3 = create_buttons(l[3], 85, 5)
+    button4 = create_buttons(l[4], 5, 85)
 
     widgets["answer1"].append(button1)
     widgets["answer2"].append(button2)
@@ -113,10 +116,10 @@ def frame_button4():
     grid.addWidget(widgets["answer3"][-1], 3, 0)
     grid.addWidget(widgets["answer4"][-1], 3, 1)
 
-def frame_input_text():
-    clear_widgets()
+
+def show_frame_input_text(que):
     # question widget
-    question = QLabel("QUESTION4button")
+    question = QLabel(que)
     question.setAlignment(QtCore.Qt.AlignCenter)
     question.setWordWrap(True)
     question.setStyleSheet(
@@ -187,7 +190,7 @@ def create_buttons(answer, l_margin, r_margin):
         }
         '''
     )
-    button.clicked.connect(show_frame1)
+    button.clicked.connect(next_question_frame)
     return button
 
 
@@ -234,8 +237,11 @@ def frame2():
 
     # answer button widgets
     button1 = create_buttons("answer1", 85, 5)
+    #button1.clicked.connect(show_frame_button2)
     button2 = create_buttons("answer2", 5, 85)
+    #button2.clicked.connect(show_frame1)
     button3 = create_buttons("answer3", 85, 5)
+    #button3.clicked.connect(show_frame_input_text)
     button4 = create_buttons("answer4", 5, 85)
 
     widgets["answer1"].append(button1)
@@ -252,7 +258,10 @@ def frame2():
 
 
 # display frame 1
-frame1()
+def show_ques():
+    frame1()
+
+show_ques()
 
 window.setLayout(grid)
 
