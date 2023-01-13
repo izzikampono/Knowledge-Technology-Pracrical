@@ -1,6 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout, \
+    QLineEdit, QInputDialog, QFormLayout, QBoxLayout, QDialog, QHBoxLayout
+from PyQt5.QtGui import QPixmap, QIntValidator, QFont, QDoubleValidator
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QCursor
 
@@ -49,8 +50,8 @@ def show_frame1():
 def start():
     '''display frame 2'''
     clear_widgets()
-    frame2()
-
+    #frame2()
+    next_question_frame()
 
 
 def frame_button2():
@@ -125,33 +126,43 @@ def frame_input_text():
         "padding: 75px;"
 
     )
-    widgets["question"].append(question)
-
-    textbox = QLineEdit()
-    textbox.setStyleSheet(
-        '''
-        *{
-            border: 4px solid '#BC006C';
-            border-radius: 45px;
-            font-size: 35px;
-            color: 'white';
-            padding: 25px 0;
-            margin: 100px 200px;
-        }
-        *:hover{
-            background: '#BC006C';
-        }
-        '''
+    e2 = QLineEdit()
+    e2.setValidator(QDoubleValidator(0.99, 99.99, 2))
+    e2.setStyleSheet(
+        "font-family: Shanti;" +
+        "font-size: 12px;" +
+        "color: 'white';" +
+        "padding: 30px;"
     )
-    textbox.move(20, 20)
-    textbox.resize(280, 40)
+
+    button1 = create_buttons("Next", 5, 85)
+    button1.clicked.connect(show_frame1)
+
+    widgets["button"].append(button1)
+    widgets["question"].append(question)
+    widgets["text"].append(e2)
+
+    grid.addWidget(widgets["button"][-1], 3, 1)
+    grid.addWidget(widgets["question"][-1], 1, 0, 1, 2)
+    grid.addWidget(widgets["text"][-1], 2, 0)
+
 
 def next_question_frame():
     # display frame for next question
     clear_widgets()
+    dicty = utils.makeDictionaryBool(current_question)
+    l = list(dicty.keys())  #question
+    q = l[0]
+    num_of_opt = len(dicty)-1
 
-    #dict = utils.makeDictionaryBool(model.current_question)
+    if num_of_opt == 2:
+        show_frame_button2(q, l)
+    elif num_of_opt == 4:
+        show_frame_button4(q, l)
+    else:
+        show_frame_input_text(q)
 
+    # dict = utils.makeDictionaryBool(model.current_question)
 
 
 def create_buttons(answer, l_margin, r_margin):
