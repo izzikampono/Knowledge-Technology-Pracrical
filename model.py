@@ -421,15 +421,7 @@ def start():
     Tree = ET.parse("rules.xml")
     root =Tree.getroot()
     reset(Tree)
-
-    tag=root.tag
-
-
-    states=["organic","nature", "num_atoms", "agg_state", "reactivity","conclusion"]
-    idx=0
-    state=states[0]
-    changeState(Tree,"organic")
-    return
+    return Tree
 
 
 def system_output():
@@ -444,7 +436,8 @@ def system_output():
 #######################################################################
 
 
-
+Tree = start()
+changeState(Tree,"organic")
 
 
 
