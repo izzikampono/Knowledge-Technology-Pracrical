@@ -159,7 +159,7 @@ def next_question_frame():
     num_of_opt = len(dicty)-1
 
     if num_of_opt == 2:
-        show_frame_button2(q, l)
+        show_frame_button2(q, l) 
     elif num_of_opt == 4:
         show_frame_button4(q, l)
     else:
