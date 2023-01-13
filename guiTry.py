@@ -1,28 +1,148 @@
-import dearpygui.dearpygui as dpg
-import dearpygui.demo as demo
-from utils import *
+import sys
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout
+from PyQt5.QtGui import QPixmap
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtGui import QCursor
 
-dpg.create_context()
-dpg.create_viewport(title='Determining chemical compounds', width=600, height=300)
+# from PyQt5 import *
+
+# global dictionary of dynamically changing widgets
+widgets = {
+    "button": [],
+    "question": [],
+    "answer1": [],
+    "answer2": [],
+    "answer3": [],
+    "answer4": []
+}
+
+# initiallize GUI application
+app = QApplication(sys.argv)
+
+# window and settings
+window = QWidget()
+window.setWindowTitle("What's that compound????")
+window.setFixedWidth(1000)
+# window.move(2700, 200)
+window.setStyleSheet("background: #161219;")
+
+# #initialliza grid layout
+grid = QGridLayout()
 
 
-def input_callback(sender, data):
-    # dpg.get_value("Regular##inputtext")
-    input_value = dpg.get_value("Input")
-    print(input_value)
+def clear_widgets():
+    ''' hide all existing widgets and erase
+        them from the global dictionary'''
+    for widget in widgets:
+        if widgets[widget] != []:
+            widgets[widget][-1].hide()
+        for i in range(0, len(widgets[widget])):
+            widgets[widget].pop()
 
 
-with dpg.window(label="Question 1"):
-    dpg.add_text("Question 1 text")
-    dpg.add_button(label="Answer 1")
-    dpg.add_button(label="Answer 2")
-    dpg.add_input_text(label="Input text", default_value=" ")
-    # prints smth to terminal
-    dpg.add_button(label="Input text", callback=input_callback)
+def show_frame1():
+    '''display frame 1'''
+    clear_widgets()
+    frame1()
 
-# demo.show_demo()
 
-dpg.setup_dearpygui()
-dpg.show_viewport()
-dpg.start_dearpygui()
-dpg.destroy_context()
+def start():
+    '''display frame 2'''
+    clear_widgets()
+    frame2()
+
+
+def create_buttons(answer, l_margin, r_margin):
+    '''create identical buttons with custom left & right margins'''
+    button = QPushButton(answer)
+    # button.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
+    button.setFixedWidth(485)
+    button.setStyleSheet(
+        # setting variable margins
+        "*{margin-left: " + str(l_margin) + "px;" +
+        "margin-right: " + str(r_margin) + "px;" +
+        '''
+        border: 4px solid '#BC006C';
+        color: white;
+        font-family: 'shanti';
+        font-size: 16px;
+        border-radius: 25px;
+        padding: 15px 0;
+        margin-top: 20px}
+        *:hover{
+            background: '#BC006C'
+        }
+        '''
+    )
+    button.clicked.connect(show_frame1)
+    return button
+
+
+def frame1():
+    # button widget
+    button = QPushButton("START")
+    button.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
+    button.setStyleSheet(
+        '''
+        *{
+            border: 4px solid '#BC006C';
+            border-radius: 45px;
+            font-size: 35px;
+            color: 'white';
+            padding: 25px 0;
+            margin: 100px 200px;
+        }
+        *:hover{
+            background: '#BC006C';
+        }
+        '''
+    )
+    # button callback
+    button.clicked.connect(start)
+    widgets["button"].append(button)
+
+    # place global widgets on the grid
+    grid.addWidget(widgets["button"][-1], 1, 0, 1, 2)
+
+
+def frame2():
+    # question widget
+    question = QLabel("Question")
+    question.setAlignment(QtCore.Qt.AlignCenter)
+    question.setWordWrap(True)
+    question.setStyleSheet(
+        '''
+        font-family: Shanti;
+        font-size: 25px;"
+        color: 'white';"
+        padding: 75px;
+        '''
+    )
+    widgets["question"].append(question)
+
+    # answer button widgets
+    button1 = create_buttons("answer1", 85, 5)
+    button2 = create_buttons("answer2", 5, 85)
+    button3 = create_buttons("answer3", 85, 5)
+    button4 = create_buttons("answer4", 5, 85)
+
+    widgets["answer1"].append(button1)
+    widgets["answer2"].append(button2)
+    widgets["answer3"].append(button3)
+    widgets["answer4"].append(button4)
+
+    # place widget on the grid
+    grid.addWidget(widgets["question"][-1], 1, 0, 1, 2)
+    grid.addWidget(widgets["answer1"][-1], 2, 0)
+    grid.addWidget(widgets["answer2"][-1], 2, 1)
+    grid.addWidget(widgets["answer3"][-1], 3, 0)
+    grid.addWidget(widgets["answer4"][-1], 3, 1)
+
+
+# display frame 1
+frame1()
+
+window.setLayout(grid)
+
+window.show()
+sys.exit(app.exec())  # terminate the app
