@@ -6,8 +6,7 @@ from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QCursor
 import xml.etree.ElementTree as et
 import utils
-
-# from PyQt5 import *
+import model
 
 # global dictionary of dynamically changing widgets
 widgets = {
@@ -37,6 +36,7 @@ Tree = et.parse("rules.xml")
 root = Tree.getroot()
 current_question = root.find("question")
 
+global dicty, l, q, num_of_opt
 
 def clear_widgets():
     ''' hide all existing widgets and erase
@@ -57,9 +57,8 @@ def show_frame1():
 def start():
     '''display frame 2'''
     clear_widgets()
-    #frame2()
+    model.start()
     next_question_frame()
-
 
 def show_frame_button2(que, l):
     # question widget
@@ -85,9 +84,9 @@ def show_frame_button2(que, l):
     grid.addWidget(widgets["answer2"][-1], 2, 1)
 
 
-def show_frame_button4(question, l):
+def show_frame_button4(que, l):
     # question widget
-    question = QLabel(question)
+    question = QLabel(que)
     question.setAlignment(QtCore.Qt.AlignCenter)
     question.setWordWrap(True)
     question.setStyleSheet(
@@ -153,11 +152,13 @@ def show_frame_input_text(que):
 def next_question_frame():
     # display frame for next question
     clear_widgets()
+    global dicty, q, l, num_of_opt
     dicty = utils.makeDictionaryBool(current_question)
     l = list(dicty.keys())  #question
     q = l[0]
     num_of_opt = len(dicty)-1
 
+    # print("click")
     if num_of_opt == 2:
         show_frame_button2(q, l) 
     elif num_of_opt == 4:
@@ -190,8 +191,14 @@ def create_buttons(answer, l_margin, r_margin):
         }
         '''
     )
-    button.clicked.connect(next_question_frame)
+    button.clicked.connect(lambda x: get_answer(answer))
     return button
+
+def get_answer(answer):
+    global dicty
+    fact = dicty[answer]
+    model.newFact(fact)
+    print(fact)
 
 
 def frame1():
@@ -213,7 +220,7 @@ def frame1():
         }
         '''
     )
-    # button callback
+    # button callbacks
     button.clicked.connect(start)
     widgets["button"].append(button)
 

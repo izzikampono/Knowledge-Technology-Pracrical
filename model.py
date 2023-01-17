@@ -2,13 +2,24 @@ from contextlib import nullcontext
 import xml.dom.minidom
 import xml.etree.ElementTree as ET
 import sys
+from utils import *
+import guiTry
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QGridLayout, \
+    QLineEdit, QInputDialog, QFormLayout, QBoxLayout, QDialog, QHBoxLayout
+from PyQt5.QtGui import QPixmap, QIntValidator, QFont, QDoubleValidator
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtGui import QCursor
+
+
 
 from compound import *
 
 
+global Tree, root
 global state,states,global_idx, molar_mass, compound_weight, precipitate_weight
 global current_question
 states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
+Tree = ET.parse("rules.xml")
 current_question = None
 global_idx=0
 state=states[global_idx]
@@ -16,7 +27,11 @@ molar_mass=0
 compound_weight=0
 precipitate_weight=0
 
+root =  Tree.getroot()
 
+
+
+#empties out factBase when program starts
 def reset(Tree):
     root=Tree.getroot()
     fb=root.find("factBase")
@@ -31,39 +46,45 @@ def reset(Tree):
 
 
 #adds new fact to the factBase
-def newFact(Tree,fact):
+def newFact(fact):
+
+    global Tree
+    root = Tree.getroot()
+    factBase = root.find("factBase")
+
+
     name = fact.attrib["name"]
     value = fact.text 
-    global state
-    root =Tree.getroot()
+    
+    root = Tree.getroot()
     factBase=root.find('factBase')
-    facts = factBase.findall('fact')
+    # facts = factBase.findall('fact')
 
-    if name=="conclusion":
+    if name == "conclusion":
         print("conclusion reached")
         if value == "cannot classify":
             print("system cannot classify the compound")
             sys.exit("done")
         next()
         changeState(Tree,state)
-        #state= "conclusion"
-        #sys.exit("done")
-        #changeState(Tree,fact.attrib["name"])
-        #print()
         return
     
     if name == "reactivity":
         next()
 
 
-    newElement = ET.SubElement(factBase,"fact")
+    try:
+        newElement = ET.SubElement(factBase,"fact")
+    except:
+        print("ERROR : root global variable not found")
+        sys.exit()
     newElement.set("name",name)
     newElement.text=value
     print(f'ADDED NEW FACT == {newElement.attrib["name"]}')
     Tree.write("rules.xml")
     updateFactbase(Tree)
 
-
+#checks if a specific factType is in the factBase
 def checkFactBaseType(Tree,name):
     root =Tree.getroot()
     factBase=root.find('factBase')
@@ -87,8 +108,8 @@ def checkFactBase(Tree,name,value):
 
 
 # finds question that is related to a fact 
-#input : fact that is needed to fulfill a specific rule  but is not present in the FB yet
-def findQuestion(Tree,fact):
+#the input should be a  fact that is needed to fulfill a specific rule  but is not present in the FB yet
+def findQuestion(fact):
     name=fact.attrib["name"]
     root=Tree.getroot()
     questions=root.findall(".//question")
@@ -193,7 +214,7 @@ def updateFactbase(Tree):
 
             if check==antecedent_count and fact.attrib["type"]=="then" and checkFactBase(Tree,fact.attrib["name"],fact.text)==False:
                 # print("IN")
-                newFact(Tree,fact)
+                newFact(fact)
             
         counter+=1
 
@@ -238,6 +259,13 @@ def calculateNumAtoms(Tree):
         return "polyhalogenated"
     return num_atoms 
 
+
+def getAnswer(answer):
+    dicty = makeDictionaryBool(current_question)
+    return dicty[answer]
+
+
+
 #function to print out the question
 #also contains if statements for a number of unique questions 
 def askQuestion(Tree,question):
@@ -246,17 +274,26 @@ def askQuestion(Tree,question):
     for j in desc:
         print(j)
     if len(desc)==3 and desc[1]!="Double bond":
+        #window = QWidget()
+        # guiTry.next_question_frame(question)
+        #answer = getInput()
+        #window.setLayout(grid)
+        #window.show()
         fact.text=getInput()
-        newFact(Tree,fact)
+
+
+        newFact(fact)
+    
 
     elif desc[1]=="Double bond":
         index=int(input())-1
         fact = question.findall(".//fact")[index]
-        newFact(Tree,fact)
+        newFact(fact)
     else:
         index=int(getInput2())
         fact.text=desc[index]
-        newFact(Tree,fact)
+        getInput2()
+        newFact(fact)
 
         
    
@@ -288,7 +325,7 @@ def askQuestion(Tree,question):
                 fact = ET.Element("fact")
                 fact.set("name","num_atoms")
                 fact.text=mm
-                newFact(Tree,fact)
+                newFact(fact)
     except:
         print("error for first fact in FB")
     
@@ -340,7 +377,7 @@ def askRelatedQuestion(Tree,rule):
         if fact.attrib["type"]=="if":
             if checkFactBaseType(Tree,fact.attrib["name"])==False:
                 # print(f'ask question abt {fact.attrib["name"]}')
-                current_question=findQuestion(Tree,fact)
+                current_question=findQuestion(fact)
                 askQuestion(Tree,current_question)
                 break
     return
@@ -371,6 +408,7 @@ def nextState(Tree,question ):
         global_idx+=1
         state=states[global_idx]
         # print("changed state")
+        return
     if question.attrib["state"]=="agg_state":
         global_idx+=1
         state=states[global_idx]
@@ -393,23 +431,39 @@ def nextState(Tree,question ):
 
 #recursive function to run the program
 def changeState(Tree,s):
-    global state,current_question
-    current_question = getQuestion(Tree,s)
-    askQuestion(Tree,current_question)
-    print(f"state = {state}")
 
     if s=="conclusion":
 
         print("===== END =====")
         return
     
+    global state,current_question
+    current_question = getQuestion(Tree,s)
+    askQuestion(Tree,current_question)
+    print(f"state = {state}")
+
+    state=""
     #change this later
     while state==s and state!="conclusion":
         updateFactbase(Tree)
         askRelatedQuestion(Tree,checkRules(Tree))
     print(state)
     changeState(Tree,state)
-    
+
+def changeState2(Tree):
+    global state,current_question
+    s = state
+    if state=="conclusion":
+        print("===== END =====")
+        return
+    updateFactbase(Tree)
+    if state=="":
+        rules = checkRules(Tree)
+        askRelatedQuestion(Tree,rules)
+    else:
+        print("in get question")
+        q = getQuestion(Tree,state)
+        askQuestion(Tree,q)
   
     return
 
@@ -418,8 +472,19 @@ def changeState(Tree,s):
 
 
 def start():
+    global Tree, root
+    global state,states,global_idx, molar_mass, compound_weight, precipitate_weight
+    global current_question
+    states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
     Tree = ET.parse("rules.xml")
-    root =Tree.getroot()
+    current_question = None
+    global_idx=0
+    state=states[global_idx]
+    molar_mass=0
+    compound_weight=0
+    precipitate_weight=0
+
+    root = Tree.getroot()
     reset(Tree)
     return Tree
 
@@ -433,16 +498,8 @@ def system_output():
     pprint(vars(compound))
     compound.eliminate()
 
-#######################################################################
-
-
-Tree = start()
-changeState(Tree,"organic")
+###################################################################################
 
 
 
-
-
-
-
-
+changeState2(Tree)
