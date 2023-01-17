@@ -39,7 +39,7 @@ def reset(Tree):
 
     for fact in fb.findall("fact") :
        fb.remove(fact)
-
+    
     return
 
 
@@ -56,11 +56,11 @@ def newFact(fact):
     name = fact.attrib["name"]
     value = fact.text 
     
-    root = Tree.getroot()
+    root =Tree.getroot()
     factBase=root.find('factBase')
     # facts = factBase.findall('fact')
 
-    if name == "conclusion":
+    if name=="conclusion":
         print("conclusion reached")
         if value == "cannot classify":
             print("system cannot classify the compound")
@@ -274,11 +274,11 @@ def askQuestion(Tree,question):
     for j in desc:
         print(j)
     if len(desc)==3 and desc[1]!="Double bond":
-        #window = QWidget()
-        # guiTry.next_question_frame(question)
+        window = QWidget()
+        guiTry.next_question_frame(question)
         #answer = getInput()
-        #window.setLayout(grid)
-        #window.show()
+        window.setLayout(grid)
+        window.show()
         fact.text=getInput()
 
 
@@ -472,18 +472,7 @@ def changeState2(Tree):
 
 
 def start():
-    global Tree, root
-    global state,states,global_idx, molar_mass, compound_weight, precipitate_weight
-    global current_question
-    states=['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
     Tree = ET.parse("rules.xml")
-    current_question = None
-    global_idx=0
-    state=states[global_idx]
-    molar_mass=0
-    compound_weight=0
-    precipitate_weight=0
-
     root = Tree.getroot()
     reset(Tree)
     return Tree
@@ -503,3 +492,15 @@ def system_output():
 
 
 changeState2(Tree)
+
+
+
+
+
+
+
+
+
+
+
+

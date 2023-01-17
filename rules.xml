@@ -8,7 +8,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact></factBase>
+    <factBase><fact name="organic">true</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
