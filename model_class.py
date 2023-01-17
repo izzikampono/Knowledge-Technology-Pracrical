@@ -15,10 +15,11 @@ class Model():
     Tree = ET.parse("rules.xml")
     root = Tree.getroot()
     states = ['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
-    global_idx = -1
+    global_idx = 0
     state=states[global_idx]
     molar_mass = 0
     compound_weight = 0
+    current_question = root.find("question")
     precipitate_weight = 0
 
     try:
@@ -55,17 +56,17 @@ class Model():
         factBase=root.find('factBase')
         # facts = factBase.findall('fact')
 
-        # if name=="conclusion":
-        #     print("conclusion reached")
-        #     if value == "cannot classify":
-        #         print("system cannot classify the compound")
-        #         sys.exit("done")
-        #     next()
-        #     changeState(Tree,state)
-        #     return
+        if name=="conclusion":
+            print("conclusion reached")
+            if value == "cannot classify":
+                print("system cannot classify the compound")
+                sys.exit("done")
+            self.next()
+            self.changeState2(state)
+            return
         
-        # if name == "reactivity":
-        #     next()
+        if name == "reactivity":
+            self.next()
 
 
         try:
@@ -136,13 +137,13 @@ class Model():
                 if fact.attrib["type"]=="if":
                     if fact.attrib["name"]==recent_fact.attrib["name"] and fact.text==recent_fact.text:
                         fact_count+=10
-                    elif self.checkFactBase(Tree,fact.attrib["name"],fact.text):
+                    elif self.checkFactBase(fact.attrib["name"],fact.text):
                         fact_count+=1
                     else:
                         not_in_fb+=1
                 if fact.attrib["type"]=="then":
                     #if the consequent is alr in the factbase, then we reset count to 0 so that the related question wont be called again
-                    if self.checkFactBaseType(Tree,fact.attrib["name"]):
+                    if self.checkFactBaseType(fact.attrib["name"]):
                         fact_count=0
             rule_count.append(fact_count)
             rule_idx+=1
@@ -166,12 +167,12 @@ class Model():
             for fact in facts:
                 if fact.attrib["type"]=="if":
                     antecedent_count+=1
-                    check+=checkFactBase(Tree,fact.attrib["name"],fact.text)
+                    check+=self.checkFactBase(fact.attrib["name"],fact.text)
                     
 
-                if check==antecedent_count and fact.attrib["type"]=="then" and checkFactBase(Tree,fact.attrib["name"],fact.text)==False:
+                if check==antecedent_count and fact.attrib["type"]=="then" and self.checkFactBase(fact.attrib["name"],fact.text)==False:
                     # print("IN")
-                    newFact(fact)
+                    self.newFact(fact)
                 
             counter+=1
 
@@ -201,21 +202,20 @@ class Model():
 
     #function to print out the question
     #also contains if statements for a number of unique questions 
-    def askQuestion(self,question):
-        desc = [x.text for x in question.findall(".//description")]
-        fact=question.find(".//fact")
-        for j in desc:
-            print(j)
-        if len(desc)==3 and desc[1]!="Double bond":
-
-            #self.newFact(fact)
-        elif desc[1]=="Double bond":
-            index=int(input())-1
-            fact = question.findall(".//fact")[index]
-            self.newFact(fact)
-        else:
-            fact.text=desc[index]
-            self.newFact(fact)
+    # def askQuestion(self,question):
+    #     desc = [x.text for x in question.findall(".//description")]
+    #     fact=question.find(".//fact")
+    #     for j in desc:
+    #         print(j)
+    #     if len(desc)==3 and desc[1]!="Double bond":
+    #         #self.newFact(fact)
+    #     elif desc[1]=="Double bond":
+    #         index=int(input())-1
+    #         fact = question.findall(".//fact")[index]
+    #         self.newFact(fact)
+    #     else:
+    #         fact.text=desc[index]
+    #         self.newFact(fact)
 
             
    
@@ -251,32 +251,37 @@ class Model():
         print("error for first fact in FB")
     
 
+    def checkState(self):
+        try:
+            print("try to change state")
+            print(self.state)
+            if 'state' in self.current_question.attrib:
+                # print("IN")
+                self.nextState()
+            else:
+                self.state=""
 
-    try:
-        print("try to change state")
-        # print(question.attrib)
-        if 'state' in question.attrib:
-            # print("IN")
-            self.nextState(question)
-    except:
-         print("CANNOT CHANGE STATE")
+        except:
+            self.state=""
+            print("CANNOT CHANGE STATE")
+        return
     
 
 #will be used for GUI. Currently asks question in terminal and returns fact
 #asks question with a specific state
 
-def getQuestion(self):
-    Tree = self.Tree
-    root=Tree.getroot()
-    questions=root.findall("question")
-    
+    def getQuestion(self):
+        Tree = self.Tree
+        root=Tree.getroot()
+        questions=root.findall("question")
+        
 
-    for question in questions:
-        if "state" in question.attrib:
-            if question.attrib["state"]==self.ßstate:
-                self.current_question=question
-                return question
-                break
+        for question in questions:
+            if "state" in question.attrib:
+                if question.attrib["state"]==self.state:
+                    self.current_question=question
+                    return question
+                    break
 
 
 
@@ -291,10 +296,9 @@ def getQuestion(self):
         facts = rule.findall("fact")
         for fact in facts:
             if fact.attrib["type"]=="if":
-                if self.checkFactBaseType(Tree,fact.attrib["name"])==False:
-                    # print(f'ask question abt {fact.attrib["name"]}')
-                    self.current_question=self.findQuestion(fact)
-                    break
+                if self.checkFactBaseType(fact.attrib["name"])==False:
+                    self.current_question = self.findQuestion(fact)
+                    return self.current_question
         return
 
 
@@ -311,72 +315,68 @@ def getQuestion(self):
 
 
 
+        question = self.current_question
 
 # ##############################################################################################################################
 
-def nextState(self,question ):
-    s = question.attrib["state"].split(".")
-    # print(s)
-    if question.attrib["state"]=="nature":
-        self.global_idx+=1
-        self.state=self.states[self.global_idx]
-        # print("changed state")
-        return
-    if question.attrib["state"]=="agg_state":
-        self.global_idx+=1
-        self.state=self.states[self.global_idx]
-        # print("changed state")
-        return
+    def nextState(self ):
+        question = self.current_question
+        s = question.attrib["state"].split(".")
+        # print(s)
+        if question.attrib["state"]=="nature":
+            self.global_idx+=1
+            self.state=self.states[self.global_idx]
+            # print("changed state")
+            return
+        if question.attrib["state"]=="agg_state":
+            self.global_idx+=1
+            self.state=self.states[self.global_idx]
+            # print("changed state")
+            return
 
-    if len(s)==2:
+        if len(s)==2:
+            
+            # state = s[0]
+            self.global_idx+=1
+            return
+
+    
+        if question.attrib["state"]=="nature.next":
+            self.global_idx+=1
+            self.state=self.states[self.global_idx]
+            return
+        else:
+            self.state = "" 
+            # print("changed state")
+            return
         
-        # state = s[0]
-        self.global_idx+=1
-        self.state=self.states[self.global_idx]
-        print("changed state")
         return
-    if question.attrib["state"]=="nature.next":
-        self.global_idx+=1
-        self.state=self.states[self.global_idx]
-    
-    return
 
-
-#recursive function to run the program
-def changeState(self,s):
-
-    if s=="conclusion":
-
-        print("===== END =====")
-        return
-    
-    global state,current_question
-    current_question = self.getQuestion()
-    self.askQuestion(self.Tree,current_question)
-    print(f"state = {self.state}")
-
-    state=""
-    #change this later
-    while state==s and state!="conclusion":
-        self.updateFactbase(self.Tree)
-        self.askRelatedQuestion(self.Tree,self.checkRules(self.Tree))
-    print(state)
-    self.changeState(self.Tree,state)
+    def mostRecent(self):
+        fb = self.root.find("factBase")
+        try:
+            recent_fact = fb.findall("fact")[-1]
+        except:
+            print("empty")
+            return False
+        if "name" in recent_fact.attrib:
+            s=recent_fact.attrib["name"].split("-")
+            if s[0]=="input":
+                return True
+        return False
 
     def changeState2(self):
-        global state,current_question
-        s = state
-        if state=="conclusion":
+        if self.state=="conclusion":
             print("===== END =====")
             return
-        self.updateFactbase(self.Tree)
-        if state=="":
-            rules = self.checkRules(self.Tree)
-            self.askRelatedQuestion(self.Tree,rules)
+        self.updateFactbase()
+        if self.state=="":
+            rules = self.checkRules()
+            self.askRelatedQuestion(rules)
         else:
             print("in get question")
-            q = self.getQuestion()
-            self.askQuestion(self.Tree,q)
+            self.current_question = self.getQuestion()
+            # self.askQuestion(self.Tree,q)
         return
 
 

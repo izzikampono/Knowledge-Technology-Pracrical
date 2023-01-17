@@ -6,7 +6,7 @@ from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QCursor
 import xml.etree.ElementTree as et
 import utils
-import model
+import model_class
 
 # global dictionary of dynamically changing widgets
 widgets = {
@@ -32,11 +32,12 @@ window.setStyleSheet("background: #161219;")
 # #initialliza grid layout
 grid = QGridLayout()
 
-Tree = et.parse("rules.xml")
-root = Tree.getroot()
-current_question = root.find("question")
+# Tree = et.parse("rules.xml")
+# root = Tree.getroot()
+# current_question = root.find("question")
 
-global dicty, l, q, num_of_opt
+global dicty, l, q, num_of_opt, model
+model = model_class.Model()
 
 def clear_widgets():
     ''' hide all existing widgets and erase
@@ -56,8 +57,8 @@ def show_frame1():
 
 def start():
     '''display frame 2'''
-    clear_widgets()
-    model.start()
+    clear_widgets() 
+    model.reset()
     next_question_frame()
 
 def show_frame_button2(que, l):
@@ -116,9 +117,9 @@ def show_frame_button4(que, l):
     grid.addWidget(widgets["answer4"][-1], 3, 1)
 
 
-def show_frame_input_text(que):
+def show_frame_input_text():
     # question widget
-    question = QLabel(que)
+    question = QLabel("Input measurement")
     question.setAlignment(QtCore.Qt.AlignCenter)
     question.setWordWrap(True)
     question.setStyleSheet(
@@ -153,18 +154,20 @@ def next_question_frame():
     # display frame for next question
     clear_widgets()
     global dicty, q, l, num_of_opt
-    dicty = utils.makeDictionaryBool(current_question)
-    l = list(dicty.keys())  #question
+    dicty = utils.makeDictionaryBool(model.current_question)
+    model.checkState()
+    l = list(dicty.keys())
     q = l[0]
     num_of_opt = len(dicty)-1
 
-    # print("click")
-    if num_of_opt == 2:
+    if model.mostRecent() == True:
+        show_frame_input_text()
+    elif num_of_opt == 2:
         show_frame_button2(q, l) 
     elif num_of_opt == 4:
         show_frame_button4(q, l)
-    else:
-        show_frame_input_text(q)
+    # elif model.mostRecent() == True:
+    #     show_frame_input_text()
 
     # dict = utils.makeDictionaryBool(model.current_question)
 
@@ -198,7 +201,15 @@ def get_answer(answer):
     global dicty
     fact = dicty[answer]
     model.newFact(fact)
-    print(fact)
+    # print(fact)
+    
+    model.changeState2()
+    # model.updateFactbase()
+    # rules = model.checkRules()
+    # model.askRelatedQuestion(rules)
+
+    next_question_frame()
+
 
 
 def frame1():
@@ -226,42 +237,6 @@ def frame1():
 
     # place global widgets on the grid
     grid.addWidget(widgets["button"][-1], 1, 0, 1, 2)
-
-
-def frame2():
-    # question widget
-    question = QLabel("QUESTION")
-    question.setAlignment(QtCore.Qt.AlignCenter)
-    question.setWordWrap(True)
-    question.setStyleSheet(
-        "font-family: Shanti;" +
-        "font-size: 25px;" +
-        "color: 'white';" +
-        "padding: 75px;"
-
-    )
-    widgets["question"].append(question)
-
-    # answer button widgets
-    button1 = create_buttons("answer1", 85, 5)
-    #button1.clicked.connect(show_frame_button2)
-    button2 = create_buttons("answer2", 5, 85)
-    #button2.clicked.connect(show_frame1)
-    button3 = create_buttons("answer3", 85, 5)
-    #button3.clicked.connect(show_frame_input_text)
-    button4 = create_buttons("answer4", 5, 85)
-
-    widgets["answer1"].append(button1)
-    widgets["answer2"].append(button2)
-    widgets["answer3"].append(button3)
-    widgets["answer4"].append(button4)
-
-    # place widget on the grid
-    grid.addWidget(widgets["question"][-1], 1, 0, 1, 2)
-    grid.addWidget(widgets["answer1"][-1], 2, 0)
-    grid.addWidget(widgets["answer2"][-1], 2, 1)
-    grid.addWidget(widgets["answer3"][-1], 3, 0)
-    grid.addWidget(widgets["answer4"][-1], 3, 1)
 
 
 # display frame 1
