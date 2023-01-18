@@ -176,23 +176,33 @@ class Model():
                 
             counter+=1
 
-    def calculateNumAtoms(self):
+    def calculateNumAtoms(self,molar_mass, compound_weight,precipitate_weight):
         Mx={"flourinated":19,"brominated":80,"iodinated":127,"chlorinated":35.5}
-        global molar_mass, compound_weight, precipitate_weight
 
         fb = self.root.find("factBase")
         facts = fb.findall("fact")
+        text = ""
+
+        if molar_mass==None or compound_weight==None or precipitate_weight==None:
+            print("unable to calculate num atoms")
+            return 
 
         for i in facts:
             if i.attrib["name"]=="nature":
                 nature=i.text
         num_atoms = molar_mass*precipitate_weight/compound_weight*( 108 + Mx[nature])#type: ignore 
 
-        if num_atoms ==1:
-            return "monohalogenated"
+        if num_atoms == 1:
+            text = "monohalogenated"
         if num_atoms>1:
-            return "polyhalogenated"
-        return num_atoms 
+            text =  "polyhalogenated"
+
+        fact = ET.Element("fact")
+        fact.set("name","num_atoms")
+        fact.text = text
+        self.newFact(fact)
+        self.next()
+        return 
 
     # def getAnswer(answer):
     #     dicty = makeDictionaryBool(current_question)
@@ -226,29 +236,29 @@ class Model():
     
 
 
-    try:
-        recent_fact = fb.findall("fact")[-1]
-        recent_fact=recent_fact.attrib["name"].split("-")
+    # try:
+    #     recent_fact = fb.findall("fact")[-1]
+    #     recent_fact=recent_fact.attrib["name"].split("-")
 
-        if recent_fact[0]=="input":
-            print("input measurement :")
-            m = float(input())
+    #     if recent_fact[0]=="input":
+    #         print("input measurement :")
+    #         m = float(input())
 
-            if recent_fact[1]=="mass":
-                self.molar_mass=m
-            elif recent_fact[1]=="compound":
-                compound_weight=m
-            elif recent_fact[1]=="precipitate":
-                precipitate_weight = m
+    #         if recent_fact[1]=="mass":
+    #             self.molar_mass=m
+    #         elif recent_fact[1]=="compound":
+    #             compound_weight=m
+    #         elif recent_fact[1]=="precipitate":
+    #             precipitate_weight = m
             
-            if precipitate_weight!=0:
-                mm = calculateNumAtoms(self.Tree)
-                fact = ET.Element("fact")
-                fact.set("name","num_atoms")
-                fact.text=mm
-                self.newFact(fact)
-    except:
-        print("error for first fact in FB")
+    #         if precipitate_weight!=0:
+    #             mm = calculateNumAtoms(self.Tree)
+    #             fact = ET.Element("fact")
+    #             fact.set("name","num_atoms")
+    #             fact.text=mm
+    #             self.newFact(fact)
+    # except:
+    #     print("error for first fact in FB")
     
 
     def checkState(self):
@@ -319,36 +329,30 @@ class Model():
 
 # ##############################################################################################################################
 
-    def nextState(self ):
+    def nextState(self):
         question = self.current_question
+        fb = self.root.find("factBase")
+        recent_fact = fb.findall("fact")[-1]
         s = question.attrib["state"].split(".")
         # print(s)
         if question.attrib["state"]=="nature":
             self.global_idx+=1
             self.state=self.states[self.global_idx]
-            # print("changed state")
+            print(f"changed state to {self.state}")
             return
-        if question.attrib["state"]=="agg_state":
-            self.global_idx+=1
-            self.state=self.states[self.global_idx]
-            # print("changed state")
+        if recent_fact.attrib["name"] == "aggregation-state":
+            self.state = "reactivity"
             return
+        if recent_fact.attrib["name"]=="num_atoms":
+            self.state = "agg_state"
+            return
+        
 
         if len(s)==2:
             
-            # state = s[0]
-            self.global_idx+=1
+            self.next()
             return
 
-    
-        if question.attrib["state"]=="nature.next":
-            self.global_idx+=1
-            self.state=self.states[self.global_idx]
-            return
-        else:
-            self.state = "" 
-            # print("changed state")
-            return
         
         return
 

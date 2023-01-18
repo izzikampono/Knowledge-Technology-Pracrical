@@ -8,7 +8,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow-ish white</fact><fact name="nature">brominated</fact><fact name="input-mass">true</fact><fact name="input-mass">true</fact><fact name="input-mass">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="NMR">true</fact><fact name="NMR">true</fact><fact name="NMR">true</fact><fact name="NMR">true</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
@@ -75,23 +75,11 @@
         <fact type="then" name="nature">fluorinated</fact>
     </rule> 
 
-    <rule>
-        <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="aggregation-state">liquid</fact>
-        <fact type="then" name="state">liquid</fact>
-    </rule> 
+    
 
-    <rule>
-        <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="aggregation-state">gas</fact>
-        <fact type="then" name="state">gas</fact>
-    </rule> 
+    
 
-    <rule>
-        <fact type="if" name="contain-halogen">true</fact>
-        <fact type="if" name="aggregation-state">solid</fact>
-        <fact type="then" name="state">solid</fact>
-    </rule> 
+    
 
     
     
