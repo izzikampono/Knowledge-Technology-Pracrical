@@ -1,6 +1,5 @@
 <knowledge>
     <goal name="conclusion">
-        <answer value="cannot classify"> "system cannot classify inorganic compound" </answer>
         <answer value="no NMR"> "System cannot determine reactivity, please perform nuclear magnetic resonance test" </answer>
         <answer value="perform spectrometry">"System cannot determine number of halogen atoms"</answer> 
         <answer value="weigh compound">"System cannot determine number of halogen atoms"</answer> 
@@ -8,7 +7,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="hydrogen-consumed">false</fact><fact name="saturation">true</fact><fact name="reactivity">normal</fact><fact name="hydrogen-consumed">false</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.54</fact><fact name="conclusion">no way</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>

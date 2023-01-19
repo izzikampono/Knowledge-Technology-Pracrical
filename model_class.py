@@ -56,14 +56,7 @@ class Model():
         factBase=root.find('factBase')
         # facts = factBase.findall('fact')
 
-        if name=="conclusion":
-            print("conclusion reached")
-            if value == "cannot classify":
-                print("system cannot classify the compound")
-                sys.exit("done")
-            # self.changeState2()
-            print("DONE")
-            return
+       
         
         if name == "reactivity":
             self.state = "conclusion"
@@ -78,6 +71,18 @@ class Model():
         newElement.text=value
         print(f'ADDED NEW FACT == {newElement.attrib["name"]}')
         Tree.write("rules.xml")
+
+        if name=="conclusion":
+            self.state = "conclusion"
+            print("conclusion reached")
+            if value == "cannot classify":
+                print("system cannot classify the compound")
+                # sys.exit("done")
+            # self.changeState2()
+            print("DONE")
+            print(f"current state : {self.state}")
+            
+        return
         # self.updateFactbase()
 
     #checks if a specific factType is in the factBase
@@ -116,7 +121,14 @@ class Model():
                 if f.attrib["name"]==name:
                     return question
     
-
+    def checkConclusion(self):
+        fb = self.root.find("factBase")
+        recent_fact = fb.findall("fact")[-1]
+        if recent_fact.attrib["name"]=="conclusion":
+            return recent_fact.text
+        else :
+            print("check conclusion : not conclusion fact in factBase")
+            return False
 
 
 #make function to check which fact we need the most
@@ -159,6 +171,9 @@ class Model():
         rules = self.root.findall("rule")
         counter=0
         
+        if self.state=="conclusion":
+            return
+
         for rule in rules:
             antecedent_count=0
             # print(f"rule number = {counter}")
@@ -205,71 +220,23 @@ class Model():
         self.next()
         return 
 
-    # def getAnswer(answer):
-    #     dicty = makeDictionaryBool(current_question)
-    #     return dicty[answer]
-
-
-
-    #function to print out the question
-    #also contains if statements for a number of unique questions 
-    # def askQuestion(self,question):
-    #     desc = [x.text for x in question.findall(".//description")]
-    #     fact=question.find(".//fact")
-    #     for j in desc:
-    #         print(j)
-    #     if len(desc)==3 and desc[1]!="Double bond":
-    #         #self.newFact(fact)
-    #     elif desc[1]=="Double bond":
-    #         index=int(input())-1
-    #         fact = question.findall(".//fact")[index]
-    #         self.newFact(fact)
-    #     else:
-    #         fact.text=desc[index]
-    #         self.newFact(fact)
-
-            
-   
-    #checks if latest fact requires user to input mass/weight
-   
-
-
-    # try:
-    #     recent_fact = fb.findall("fact")[-1]
-    #     recent_fact=recent_fact.attrib["name"].split("-")
-
-    #     if recent_fact[0]=="input":
-    #         print("input measurement :")
-    #         m = float(input())
-
-    #         if recent_fact[1]=="mass":
-    #             self.molar_mass=m
-    #         elif recent_fact[1]=="compound":
-    #             compound_weight=m
-    #         elif recent_fact[1]=="precipitate":
-    #             precipitate_weight = m
-            
-    #         if precipitate_weight!=0:
-    #             mm = calculateNumAtoms(self.Tree)
-    #             fact = ET.Element("fact")
-    #             fact.set("name","num_atoms")
-    #             fact.text=mm
-    #             self.newFact(fact)
-    # except:
-    #     print("error for first fact in FB")
     
 
     def checkState(self):
+        print("IN checkState")
+        if self.state == "conclusion":
+            return
         try:
             print("try to change state")
             print(self.state)
+
+            self.updateFactbase()
             if 'state' in self.current_question.attrib:
                 # print("IN")
                 self.nextState()
-            else:
-                print("state changed to =''")
-                self.state=""
-
+            # else:
+                # print("state changed to =''")
+                # self.state=""
         except:
             self.state=""
             print("CANNOT CHANGE STATE")
@@ -339,6 +306,8 @@ class Model():
         recent_fact_name = recent_fact.attrib["name"]
         print(f"recent fact : {recent_fact_name}")
         s = question.attrib["state"].split(".")
+        if self.state == "conclusion":
+            return
         if recent_fact_name == "precipitate-color" or recent_fact_name=="nature":
             self.state = "num_atoms"
             print(f"state changed to {self.state}")
@@ -364,8 +333,7 @@ class Model():
             print(f"state changed to {self.state}")
 
             return
-        if self.state == "conclusion":
-            return
+        
         
         self.state =""
         return
@@ -397,21 +365,15 @@ class Model():
             self.getQuestion()
         return
 
+    def system_output(self):
+        self.Tree = ET.parse("rules.xml")
+        compound = Compound()
+        dict = loadFactBase(self.Tree)
+        compound.import_dict(dict)
 
-    
-
-
-
-
-
-def system_output():
-    Tree = ET.parse("rules.xml")
-    compound = Compound()
-    dict = loadFactBase(Tree)
-    compound.import_dict(dict)
-
-    pprint(vars(compound))
-    compound.eliminate()
+        pprint(vars(compound))
+        return compound.eliminate()
+        
 
 # ###################################################################################
 
@@ -425,7 +387,6 @@ fact.text="true"
 
 model = Model()
 model.reset()
-model.newFact(fact)
 
 
 

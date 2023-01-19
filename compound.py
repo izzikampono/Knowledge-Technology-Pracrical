@@ -89,7 +89,7 @@ class Compound():
                         print("{} not in list".format(compound["name"]))
             
         print(f"list of possible compounds : {self.possible_list}")
-        return
+        return self.possible_list
 
 
 
@@ -106,7 +106,9 @@ class Compound():
     #     self.polarity=polarity
     #     return
     
-    def import_dict(self,fact_dict):
+    def import_dict(self,fact_dict): 
+        print("Dictionary from factBase : \n")
+        print(fact_dict)
         for i in fact_dict.items():
             self.setter(i)
         return

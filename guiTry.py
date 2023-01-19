@@ -16,7 +16,9 @@ widgets = {
     "answer2": [],
     "answer3": [],
     "answer4": [],
-    "text": []
+    "text": [],
+    "conclusion": [],
+    "final_answer":[]
 }
 
 # initiallize GUI application
@@ -40,7 +42,7 @@ global dicty, l, q, num_of_opt, model, input_text, list_of_input, flag
 list_of_input = []
 flag = 0
 model = model_class.Model()
-model.reset()
+# model.reset()
 
 def clear_widgets():
     ''' hide all existing widgets and erase
@@ -57,12 +59,11 @@ def show_frame1():
     clear_widgets()
     frame1()
 
-
 def start():
     '''display frame 2'''
     clear_widgets() 
     model.reset()
-    next_question_frame()
+    update_question_frame()
 
 def show_frame_button2(que, l):
     # question widget
@@ -144,7 +145,6 @@ def show_frame_button4(que, l):
     grid.addWidget(widgets["answer3"][-1], 3, 0)
     grid.addWidget(widgets["answer4"][-1], 3, 1)
 
-
 def next_question():
     global flag,model
     list_of_input.append(float(input_text.text()))
@@ -156,8 +156,7 @@ def next_question():
         flag = 1
         print(model.state)
     model.changeState2()
-    next_question_frame()
-
+    update_question_frame()
 
 def show_frame_input_text():
     # question widget
@@ -178,7 +177,6 @@ def show_frame_input_text():
         "font-size: 25px;" +
         "color: 'white';" +
         "padding: 75px;"
-
     )
 
     global input_text
@@ -191,7 +189,7 @@ def show_frame_input_text():
         "padding: 30px;"
     )
 
-    button1 = create_next_button("Next", 5, 85)
+    button1 = create_buttons("Next", 5, 85)
     button1.clicked.connect(next_question)
     
     widgets["button"].append(button1)
@@ -202,36 +200,59 @@ def show_frame_input_text():
     grid.addWidget(widgets["question"][-1], 1, 0, 1, 2)
     grid.addWidget(widgets["text"][-1], 2, 0)
 
-def show_conclusion():
-    label = "conclusion reached"
- 
+def get_possible_answer():
+    possible_answer = model.system_output()
+    
+    answer = "Possible compound(s): \n" + possible_answer[0] + "\n"
+    for x in range(1, len(possible_answer)):
+        answer = answer + "\n" + str(possible_answer[x]) + "\n"
+    
+    return answer
 
-    question = QLabel(label)
-    question.setAlignment(QtCore.Qt.AlignCenter)
-    question.setWordWrap(True)
+def show_frame_conclusion():
+    possible_answer = get_possible_answer()
+    conclusion = str(model.checkConclusion())
 
-    question.setStyleSheet(
+    con = QLabel(conclusion)
+    con.setAlignment(QtCore.Qt.AlignCenter)
+    con.setWordWrap(True)
+
+    answer = QLabel(possible_answer)
+    answer.setAlignment(QtCore.Qt.AlignCenter)
+    answer.setWordWrap(True)
+
+    con.setStyleSheet(
         "font-family: Shanti;" +
         "font-size: 25px;" +
         "color: 'white';" +
         "padding: 75px;"
-
     )
 
+    answer.setStyleSheet(
+        "font-family: Shanti;" +
+        "font-size: 18px;" +
+        "color: 'white';" +
+        "padding: 75px;"
+    )
 
-def next_question_frame():
+    widgets["conclusion"].append(con)
+    widgets["final_answer"].append(answer)
+    grid.addWidget(widgets["conclusion"][-1], 1, 0, 1, 2)
+    grid.addWidget(widgets["final_answer"][-1], 2, 0, 1, 2)
+
+
+def update_question_frame():
     # display frame for next question
     clear_widgets()
     global dicty, q, l, num_of_opt, flag
     dicty = utils.makeDictionaryBool(model.current_question)
-    # model.checkState()
     l = list(dicty.keys())
     q = l[0]
     num_of_opt = len(dicty)-1
-
+    
     if model.state == "conclusion":
-        show_conclusion()
-    if model.mostRecent() == True and flag == 0:
+        show_frame_conclusion()
+    elif model.mostRecent() == True and flag == 0:
         show_frame_input_text()
         flag = 1
     elif num_of_opt == 2:
@@ -243,28 +264,6 @@ def next_question_frame():
         flag = 0
         show_frame_button4(q, l)
 
-def create_next_button(answer, l_margin, r_margin):
-    button = QPushButton(answer)
-    # button.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
-    button.setFixedWidth(485)
-    button.setStyleSheet(
-        # setting variable margins
-        "*{margin-left: " + str(l_margin) + "px;" +
-        "margin-right: " + str(r_margin) + "px;" +
-        '''
-        border: 4px solid '#BC006C';
-        color: white;
-        font-family: 'shanti';
-        font-size: 16px;
-        border-radius: 25px;
-        padding: 15px 0;
-        margin-top: 20px}
-        *:hover{
-            background: '#BC006C'
-        }
-        '''
-    )
-    return button
 
 def create_buttons(answer, l_margin, r_margin):
     '''create identical buttons with custom left & right margins'''
@@ -288,19 +287,21 @@ def create_buttons(answer, l_margin, r_margin):
         }
         '''
     )
-    button.clicked.connect(lambda x: get_answer(answer))
+    if(answer == "Next"):
+        return button
+    else:
+        button.clicked.connect(lambda x: get_answer(answer))
     return button
 
 def get_answer(answer):
-    global dicty
+    global dicty,model
     fact = dicty[answer]
     model.newFact(fact)
-    model.checkState()
+    if model.state!="conclusion":
+        model.checkState()
     model.changeState2()
     model.updateFactbase()
-    next_question_frame()
-
-
+    update_question_frame()  # after button clicked, frame updates
 
 def frame1():
     # button widget
@@ -327,7 +328,6 @@ def frame1():
 
     # place global widgets on the grid
     grid.addWidget(widgets["button"][-1], 1, 0, 1, 2)
-
 
 # display frame 1
 def show_ques():

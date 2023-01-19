@@ -275,7 +275,7 @@ def askQuestion(Tree,question):
         print(j)
     if len(desc)==3 and desc[1]!="Double bond":
         window = QWidget()
-        guiTry.next_question_frame(question)
+        guiTry.update_question_frame(question)
         #answer = getInput()
         window.setLayout(grid)
         window.show()
