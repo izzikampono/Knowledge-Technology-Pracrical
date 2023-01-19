@@ -8,9 +8,11 @@
         <answer value="no way">There is no compound in our database that satisfies this requirement.</answer>
         <answer value="unorganic">System cannot classify this compound. It is not organic.</answer>
         <answer value="not halogenic">System cannot classify this compound. It is not a halogenic compound.</answer>
+        <answer value="done">System done with classification.</answer>
+
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">false</fact><fact name="conclusion">perform spectrometry</fact><fact name="num_atoms" /><fact name="aggregation-state">liquid</fact><fact name="aggregation-state">liquid</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="hydrogen-consumed">false</fact><fact name="saturation">true</fact><fact name="reactivity">normal</fact></factBase>
 
 
      <rule>
@@ -272,6 +274,20 @@
 
     </rule>
   
+    <rule>
+        <fact type="if" name="reactivity">low</fact>
+        <fact type="then" name="conclusion">done</fact>
+    </rule>
+    <rule>
+        <fact type="if" name="reactivity">high</fact>
+        <fact type="then" name="conclusion">done</fact>
+
+    </rule>
+     <rule>
+        <fact type="if" name="reactivity">normal</fact>
+        <fact type="then" name="conclusion">done</fact>
+
+    </rule>
 
     <question state="bond-length">
         <description>what is the length of the bond? (unit : angstrom) &gt;</description>
@@ -292,7 +308,7 @@
   
 
     <question>
-        <description>Dis you perform a hydrogenation test?&gt;</description>
+        <description>Did you perform a hydrogenation test?</description>
             <option>
                 <description>yes</description>
                     <then> <fact name="hydrogenation test">true</fact></then>
@@ -310,7 +326,7 @@
     </rule> 
 
     <question state="conclusion.next">
-        <description>Did the hydrogen get consumed?&gt;</description>
+        <description>Did the hydrogen get consumed?</description>
             <option>
                 <description>yes</description>
                     <then> <fact name="hydrogen-consumed">false</fact></then>

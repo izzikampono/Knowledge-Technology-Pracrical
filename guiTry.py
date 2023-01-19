@@ -164,7 +164,7 @@ def next_no_input():
     factBase = model.root.find("factBase")
     newElement = et.SubElement(factBase,"fact")
     newElement.set("name","num_atoms")
-    newElement.text = ""
+    newElement.text =" test  "
 
     model.newFact(newElement)
     model.state = "agg_state"
@@ -216,15 +216,18 @@ def show_frame_input_text():
 def get_possible_answer():
     possible_answer = model.system_output()
     
-    answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
-    for x in range(1, len(possible_answer)):
-        answer = answer + "\n" + str(possible_answer[x]) + "\n"
+    if(len(possible_answer) > 0):
+        answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
+        for x in range(1, len(possible_answer)):
+            answer = answer + "\n" + str(possible_answer[x]) + "\n"
     
     return answer
 
 def show_frame_conclusion():
     show = 0
     possible_answer = get_possible_answer()
+    model.updateFactbase()
+
     conclusion = model.checkConclusion()
 
     text = conclusion.text
@@ -272,7 +275,7 @@ def show_frame_conclusion():
 def update_question_frame():
     # display frame for next question
     clear_widgets()
-    global dicty, q, l, num_of_opt, flag
+    global dicty, q, l, num_of_opt, flag, model
     dicty = utils.makeDictionaryBool(model.current_question)
     l = list(dicty.keys())
     q = l[0]

@@ -57,8 +57,8 @@ class Model():
         # facts = factBase.findall('fact')
 
         
-        if name == "reactivity":
-            self.state = "conclusion"
+        # if name == "reactivity":
+        #     self.state = "conclusion"
     
 
         try:
@@ -119,8 +119,12 @@ class Model():
             for f in facts:
                 if f.attrib["name"]==name:
                     return question
-    
+    def updateXML(self):
+        self.Tree = ET.parse("rules.xml")
+        self.root = self.Tree.getroot()
+        return
     def checkConclusion(self):
+        self.updateXML()
         fb = self.root.find("factBase")
         recent_fact = fb.findall("fact")[-1]
         if recent_fact.attrib["name"]=="conclusion":
@@ -173,6 +177,7 @@ class Model():
         #checks facts in the factbase and sees if any of the rules can fire,
         # if yes, the rule fires and the resulting fact is added to the factbase
     def updateFactbase(self):
+        self.updateXML()
         rules = self.root.findall("rule")
         counter=0
         
@@ -261,7 +266,7 @@ class Model():
                 if question.attrib["state"]==self.state:
                     self.current_question=question
                     return question
-                    break
+                    
 
 
 
@@ -305,7 +310,9 @@ class Model():
 
     def nextState(self):
         question = self.current_question
-        fb = self.root.find("factBase")
+        Tree = ET.parse("rules.xml")
+        root = Tree.getroot()
+        fb = root.find("factBase")
         recent_fact = fb.findall("fact")[-1]
         recent_fact_name = recent_fact.attrib["name"]
         print(f"recent fact : {recent_fact_name}")
@@ -356,7 +363,7 @@ class Model():
         return False
 
     def changeState2(self):
-        print(f"current state : {self.state} ")
+        print(f"current state : {self.state} \n")
         if self.state=="conclusion":
             print("===== END =====")
             return
