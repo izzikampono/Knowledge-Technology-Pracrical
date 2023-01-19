@@ -295,14 +295,9 @@ def get_answer(answer):
     global dicty
     fact = dicty[answer]
     model.newFact(fact)
-    # print(fact)
     model.checkState()
     model.changeState2()
-
     model.updateFactbase()
-    # rules = model.checkRules()
-    # model.askRelatedQuestion(rules)
-
     next_question_frame()
 
 
