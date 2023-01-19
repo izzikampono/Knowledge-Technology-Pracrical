@@ -164,7 +164,7 @@ def next_no_input():
     factBase = model.root.find("factBase")
     newElement = et.SubElement(factBase,"fact")
     newElement.set("name","num_atoms")
-    newElement.text =" test  "
+    newElement.text =""
 
     model.newFact(newElement)
     model.state = "agg_state"
@@ -215,9 +215,10 @@ def show_frame_input_text():
 
 def get_possible_answer():
     possible_answer = model.system_output()
-    answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
-
-    for x in range(1, len(possible_answer)):
+    answer = ""
+    if(len(possible_answer) > 0):
+        answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
+        for x in range(1, len(possible_answer)):
             answer = answer + "\n" + str(possible_answer[x]) + "\n"
     
     return answer

@@ -125,6 +125,7 @@ class Model():
         return
     def checkConclusion(self):
         self.updateXML()
+        self.updateFactbase()
         fb = self.root.find("factBase")
         recent_fact = fb.findall("fact")[-1]
         if recent_fact.attrib["name"]=="conclusion":

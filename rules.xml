@@ -12,7 +12,7 @@
 
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">solid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.54</fact><fact name="conclusion">no way</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">false</fact><fact name="conclusion">perform spectrometry</fact><fact name="num_atoms" /><fact name="num_atoms" /><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.33</fact><fact name="sp2">true</fact><fact name="reactivity">low</fact><fact name="conclusion">done</fact></factBase>
 
 
      <rule>
@@ -257,6 +257,13 @@
         <fact type="then" name="conclusion">no way</fact>
     </rule>
 
+     <rule>
+        <fact type="if" name="normal-bond">true</fact>
+        <fact type="if" name="bond-length">1.33</fact>
+        <fact type="then" name="conclusion">no way</fact>
+    </rule>
+
+
     <rule>
         <fact type="if" name="double-bond">true</fact>
         <fact type="if" name="bond-length">1.39</fact>
@@ -274,20 +281,7 @@
 
     </rule>
   
-    <rule>
-        <fact type="if" name="reactivity">low</fact>
-        <fact type="then" name="conclusion">done</fact>
-    </rule>
-    <rule>
-        <fact type="if" name="reactivity">high</fact>
-        <fact type="then" name="conclusion">done</fact>
-
-    </rule>
-     <rule>
-        <fact type="if" name="reactivity">normal</fact>
-        <fact type="then" name="conclusion">done</fact>
-
-    </rule>
+   
 
     <question state="bond-length">
         <description>what is the length of the bond? (unit : angstrom) &gt;</description>
@@ -432,5 +426,20 @@
             </then>
         </option>
     </question>
+
+     <rule>
+        <fact type="if" name="reactivity">low</fact>
+        <fact type="then" name="conclusion">done</fact>
+    </rule>
+    <rule>
+        <fact type="if" name="reactivity">high</fact>
+        <fact type="then" name="conclusion">done</fact>
+
+    </rule>
+     <rule>
+        <fact type="if" name="reactivity">normal</fact>
+        <fact type="then" name="conclusion">done</fact>
+
+    </rule>
 
 </knowledge>
