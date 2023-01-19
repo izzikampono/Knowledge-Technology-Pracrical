@@ -155,6 +155,19 @@ def next_question():
         model.calculateNumAtoms(list_of_input[0], list_of_input[1], list_of_input[2])
         flag = 1
         print(model.state)
+    
+    model.changeState2()
+    update_question_frame()
+
+def next_no_input():
+    global model
+    factBase = model.root.find("factBase")
+    newElement = et.SubElement(factBase,"fact")
+    newElement.set("name","num_atoms")
+    newElement.text = ""
+
+    model.newFact(newElement)
+    model.state = "agg_state"
     model.changeState2()
     update_question_frame()
 
@@ -203,17 +216,31 @@ def show_frame_input_text():
 def get_possible_answer():
     possible_answer = model.system_output()
     
-    answer = "Possible compound(s): \n" + possible_answer[0] + "\n"
+    answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
     for x in range(1, len(possible_answer)):
         answer = answer + "\n" + str(possible_answer[x]) + "\n"
     
     return answer
 
 def show_frame_conclusion():
+    show = 0
     possible_answer = get_possible_answer()
-    conclusion = str(model.checkConclusion())
+    conclusion = model.checkConclusion()
 
-    con = QLabel(conclusion)
+    text = conclusion.text
+    tag = conclusion.attrib['value']
+    
+    if tag == "unorganic" or tag == "not halogenic":
+        show = 1
+    
+    if tag == "perform spectrometry" or tag == "weigh compound" or tag == "weigh precipitate":
+        next = create_buttons("Next", 5, 85)
+        next.clicked.connect(next_no_input)
+
+        widgets["button"].append(next)
+        grid.addWidget(widgets["button"][-1], 3, 1)
+        
+    con = QLabel(text)
     con.setAlignment(QtCore.Qt.AlignCenter)
     con.setWordWrap(True)
 
@@ -234,11 +261,12 @@ def show_frame_conclusion():
         "color: 'white';" +
         "padding: 75px;"
     )
-
+    
     widgets["conclusion"].append(con)
     widgets["final_answer"].append(answer)
     grid.addWidget(widgets["conclusion"][-1], 1, 0, 1, 2)
-    grid.addWidget(widgets["final_answer"][-1], 2, 0, 1, 2)
+    if(show == 0):
+        grid.addWidget(widgets["final_answer"][-1], 2, 0, 1, 2)
 
 
 def update_question_frame():

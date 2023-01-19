@@ -1,24 +1,30 @@
 <knowledge>
     <goal name="conclusion">
-        <answer value="no NMR"> "System cannot determine reactivity, please perform nuclear magnetic resonance test" </answer>
-        <answer value="perform spectrometry">"System cannot determine number of halogen atoms"</answer> 
-        <answer value="weigh compound">"System cannot determine number of halogen atoms"</answer> 
-        <answer value="weigh precipitate">"System cannot determine number of halogen atoms"</answer> 
-        <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
+        <answer value="no NMR"> System cannot determine reactivity, please perform nuclear magnetic resonance test.</answer>
+        <answer value="perform spectrometry">System cannot determine number of halogen atoms.</answer> 
+        <answer value="weigh compound">System cannot determine number of halogen atoms.</answer> 
+        <answer value="weigh precipitate">System cannot determine number of halogen atoms.</answer> 
+        <answer value="hydrogenation test">System cannot determine reactivity, please perform hydrogenation test.</answer>
+        <answer value="no way">There is no compound in our database that satisfies this requirement.</answer>
+        <answer value="unorganic">System cannot classify this compound. It is not organic.</answer>
+        <answer value="not halogenic">System cannot classify this compound. It is not a halogenic compound.</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.54</fact><fact name="conclusion">no way</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">false</fact><fact name="conclusion">perform spectrometry</fact><fact name="num_atoms" /><fact name="aggregation-state">liquid</fact><fact name="aggregation-state">liquid</fact></factBase>
 
+
+     <rule>
+        <fact type="if" name="burn-oxygen">false</fact>
+        <fact type="then" name="organic">false</fact>
+    </rule>
+    
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
         <fact type="if" name="co2">true</fact>
         <fact type="then" name="organic">true</fact>
     </rule>
 
-    <rule>
-        <fact type="if" name="burn-oxygen">false</fact>
-        <fact type="then" name="organic">false</fact>
-    </rule>
+  
 
     <rule>
         <fact type="if" name="co2">false</fact>
@@ -27,7 +33,7 @@
 
     <rule>
         <fact type="if" name="organic">false</fact>
-        <fact type="then" name="conclusion">cannot classify</fact> 
+        <fact type="then" name="conclusion">unorganic</fact> 
     
     </rule>
 
@@ -41,7 +47,7 @@
     <rule>
         <fact type="if" name="organic">true</fact>
         <fact type="if" name="react-silver">false</fact>
-        <fact type="then" name="conclusion">cannot classify</fact>
+        <fact type="then" name="conclusion">not halogenic</fact>
     </rule>
 
     <rule>
@@ -73,14 +79,6 @@
         <fact type="if" name="precipitate-color">opalescent</fact>
         <fact type="then" name="nature">fluorinated</fact>
     </rule> 
-
-    
-
-    
-
-    
-
-    
     
     <rule>
         <fact type="if" name="input-mass">false</fact>
@@ -115,7 +113,7 @@
         </option>
         <option>
             <description>no</description>
-            <fact name="burn-oxygen">False</fact>
+            <fact name="burn-oxygen">false</fact>
         </option>
     </question>
 

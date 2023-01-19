@@ -56,7 +56,6 @@ class Model():
         factBase=root.find('factBase')
         # facts = factBase.findall('fact')
 
-       
         
         if name == "reactivity":
             self.state = "conclusion"
@@ -125,10 +124,16 @@ class Model():
         fb = self.root.find("factBase")
         recent_fact = fb.findall("fact")[-1]
         if recent_fact.attrib["name"]=="conclusion":
+            goal = self.root.find("goal")
+            conclusions=goal.findall("answer")
+            for i in conclusions:
+                if i.attrib['value'] == recent_fact.text:
+                    return i
+
             return recent_fact.text
         else :
             print("check conclusion : not conclusion fact in factBase")
-            return False
+        return False
 
 
 #make function to check which fact we need the most
@@ -184,7 +189,6 @@ class Model():
                 if fact.attrib["type"]=="if":
                     antecedent_count+=1
                     check+=self.checkFactBase(fact.attrib["name"],fact.text)
-                    
 
                 if check==antecedent_count and fact.attrib["type"]=="then" and self.checkFactBase(fact.attrib["name"],fact.text)==False:
                     # print("IN")
@@ -223,7 +227,7 @@ class Model():
     
 
     def checkState(self):
-        print("IN checkState")
+        print("IN checkState ")
         if self.state == "conclusion":
             return
         try:
@@ -352,6 +356,7 @@ class Model():
         return False
 
     def changeState2(self):
+        print(f"current state : {self.state} ")
         if self.state=="conclusion":
             print("===== END =====")
             return
