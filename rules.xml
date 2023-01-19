@@ -12,7 +12,7 @@
 
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="hydrogen-consumed">false</fact><fact name="saturation">true</fact><fact name="reactivity">normal</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">solid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.54</fact><fact name="conclusion">no way</fact></factBase>
 
 
      <rule>
