@@ -8,7 +8,7 @@
         <answer value="hydrogenation test"> System cannot determine reactivity, please perform hydrogenation test</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow-ish white</fact><fact name="nature">brominated</fact><fact name="input-mass">true</fact><fact name="input-mass">true</fact><fact name="input-mass">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="NMR">true</fact><fact name="NMR">true</fact><fact name="NMR">true</fact><fact name="NMR">true</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">polyhalogenated</fact><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.39</fact><fact name="saturation">aromatic</fact><fact name="reactivity">low</fact></factBase>
 
     <rule>
         <fact type="if" name="burn-oxygen">true</fact>
@@ -203,7 +203,7 @@
     </question>
 
 
-    <question state="reactivity">
+    <question state="bond_type">
         <description>Did you perform a nuclear magnetic resonance test?</description>
             <option>
                 <description>Yes</description>
@@ -261,7 +261,7 @@
     <rule>
         <fact type="if" name="double-bond">true</fact>
         <fact type="if" name="bond-length">1.39</fact>
-        <fact type="then" name="conclusion">no way</fact>
+        <fact type="then" name="conclusion">unable to classify</fact>
     </rule>
 
     <rule>
@@ -334,6 +334,11 @@
     <rule>
         <fact type="if" name="saturation">true</fact>
         <fact type="then" name="reactivity">normal</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="saturation">false</fact>
+        <fact type="then" name="reactivity">high</fact>
     </rule>
 
     <rule>

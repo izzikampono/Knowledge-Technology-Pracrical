@@ -40,6 +40,7 @@ global dicty, l, q, num_of_opt, model, input_text, list_of_input, flag
 list_of_input = []
 flag = 0
 model = model_class.Model()
+model.reset()
 
 def clear_widgets():
     ''' hide all existing widgets and erase
@@ -150,12 +151,11 @@ def next_question():
     #print(input_text.text())
     # print(list_of_input)
     if(len(list_of_input) == 3):
-        print("in if statement")
+        print("in if, calculate num atoms")
         model.calculateNumAtoms(list_of_input[0], list_of_input[1], list_of_input[2])
         flag = 1
         print(model.state)
-        model.changeState2()
-
+    model.changeState2()
     next_question_frame()
 
 
@@ -202,18 +202,35 @@ def show_frame_input_text():
     grid.addWidget(widgets["question"][-1], 1, 0, 1, 2)
     grid.addWidget(widgets["text"][-1], 2, 0)
 
+def show_conclusion():
+    label = "conclusion reached"
+ 
+
+    question = QLabel(label)
+    question.setAlignment(QtCore.Qt.AlignCenter)
+    question.setWordWrap(True)
+
+    question.setStyleSheet(
+        "font-family: Shanti;" +
+        "font-size: 25px;" +
+        "color: 'white';" +
+        "padding: 75px;"
+
+    )
+
 
 def next_question_frame():
     # display frame for next question
     clear_widgets()
     global dicty, q, l, num_of_opt, flag
     dicty = utils.makeDictionaryBool(model.current_question)
-    model.checkState()
+    # model.checkState()
     l = list(dicty.keys())
     q = l[0]
     num_of_opt = len(dicty)-1
 
-    
+    if model.state == "conclusion":
+        show_conclusion()
     if model.mostRecent() == True and flag == 0:
         show_frame_input_text()
         flag = 1
@@ -279,9 +296,10 @@ def get_answer(answer):
     fact = dicty[answer]
     model.newFact(fact)
     # print(fact)
-    
+    model.checkState()
     model.changeState2()
-    # model.updateFactbase()
+
+    model.updateFactbase()
     # rules = model.checkRules()
     # model.askRelatedQuestion(rules)
 

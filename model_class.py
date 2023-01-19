@@ -14,7 +14,7 @@ from compound import *
 class Model():
     Tree = ET.parse("rules.xml")
     root = Tree.getroot()
-    states = ['organic',"nature","num_atoms","agg_state","reactivity",'conclusion']
+    states = ['organic',"nature","num_atoms","agg_state","bond_type","reactivity",'conclusion']
     global_idx = 0
     state=states[global_idx]
     molar_mass = 0
@@ -61,13 +61,13 @@ class Model():
             if value == "cannot classify":
                 print("system cannot classify the compound")
                 sys.exit("done")
-            self.next()
-            self.changeState2(state)
+            # self.changeState2()
+            print("DONE")
             return
         
         if name == "reactivity":
-            self.next()
-
+            self.state = "conclusion"
+    
 
         try:
             newElement = ET.SubElement(factBase,"fact")
@@ -78,7 +78,7 @@ class Model():
         newElement.text=value
         print(f'ADDED NEW FACT == {newElement.attrib["name"]}')
         Tree.write("rules.xml")
-        self.updateFactbase()
+        # self.updateFactbase()
 
     #checks if a specific factType is in the factBase
     def checkFactBaseType(self,name):
@@ -115,6 +115,7 @@ class Model():
             for f in facts:
                 if f.attrib["name"]==name:
                     return question
+    
 
 
 
@@ -230,10 +231,7 @@ class Model():
             
    
     #checks if latest fact requires user to input mass/weight
-    root=Tree.getroot()
-    fb=root.find("factBase")
-
-    
+   
 
 
     # try:
@@ -269,6 +267,7 @@ class Model():
                 # print("IN")
                 self.nextState()
             else:
+                print("state changed to =''")
                 self.state=""
 
         except:
@@ -315,8 +314,12 @@ class Model():
 
     
     def next(self):
-        self.global_idx+=1
-        self.state=self.states[self.global_idx]
+        try:
+            idx = self.states.index(self.state)
+            self.state= self.states[idx+1]
+        except:
+            self.global_idx+=1
+            self.state=self.states[self.global_idx]
         return 
     
 
@@ -333,27 +336,38 @@ class Model():
         question = self.current_question
         fb = self.root.find("factBase")
         recent_fact = fb.findall("fact")[-1]
+        recent_fact_name = recent_fact.attrib["name"]
+        print(f"recent fact : {recent_fact_name}")
         s = question.attrib["state"].split(".")
-        # print(s)
-        if question.attrib["state"]=="nature":
-            self.global_idx+=1
-            self.state=self.states[self.global_idx]
-            print(f"changed state to {self.state}")
+        if recent_fact_name == "precipitate-color" or recent_fact_name=="nature":
+            self.state = "num_atoms"
+            print(f"state changed to {self.state}")
             return
-        if recent_fact.attrib["name"] == "aggregation-state":
-            self.state = "reactivity"
-            return
-        if recent_fact.attrib["name"]=="num_atoms":
+        if recent_fact_name == "num_atoms":
             self.state = "agg_state"
+            print(f"state changed to {self.state}")
+
+            return
+        if recent_fact_name== "aggregation-state":
+
+            self.state = "bond_type"
+            print(f"state changed to {self.state}")
+
+            return
+        if recent_fact_name=="normal-bond" or recent_fact_name=="double-bond":
+            self.state = "reactivity"
+            print(f"state changed to {self.state}")
+
+            return
+        if recent_fact_name == "reactivity":
+            self.state = "conclusion"
+            print(f"state changed to {self.state}")
+
+            return
+        if self.state == "conclusion":
             return
         
-
-        if len(s)==2:
-            
-            self.next()
-            return
-
-        
+        self.state =""
         return
 
     def mostRecent(self):
@@ -374,13 +388,13 @@ class Model():
             print("===== END =====")
             return
         self.updateFactbase()
+        self.checkState()
         if self.state=="":
             rules = self.checkRules()
             self.askRelatedQuestion(rules)
         else:
             print("in get question")
-            self.current_question = self.getQuestion()
-            # self.askQuestion(self.Tree,q)
+            self.getQuestion()
         return
 
 
