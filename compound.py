@@ -156,25 +156,6 @@ def getAttrib(Compound):
 ############################## MAIN ##################################
 
 
-# test = Compound()
-# setattr(test,'nature',"Chlorinated")
-# setattr(test,"num_atoms","Monohalogenated")
-#setattr(test,"position","Saturated")
-#print(test.nature)
-
-# print(inspect.getmembers(Compound)
-# )
-# Tree = ET.parse("rules.xml")
-
-# dict = loadFactBase(Tree)
-# test.import_dict(dict)
-
-# pprint(vars(test))
-# test.eliminate()
-
-
-#Match(test,"kb2.json")
-
 
     
 

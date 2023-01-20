@@ -11,6 +11,7 @@ import model_class
 # global dictionary of dynamically changing widgets
 widgets = {
     "button": [],
+    "reset_button": [],
     "question": [],
     "answer1": [],
     "answer2": [],
@@ -54,16 +55,6 @@ def clear_widgets():
             widgets[widget].pop()
 
 
-def show_frame1():
-    '''display frame 1'''
-    clear_widgets()
-    frame1()
-
-def start():
-    '''display frame 2'''
-    clear_widgets() 
-    model.reset()
-    update_question_frame()
 
 def show_frame_button2(que, l):
     # question widget
@@ -237,11 +228,22 @@ def show_frame_conclusion():
         dont_show = 1
     
     if tag == "perform spectrometry" or tag == "weigh compound" or tag == "weigh precipitate":
-        next = create_buttons("Next", 5, 85)
+        dont_show = 1
+        next = create_buttons("Next", 5, 70)
         next.clicked.connect(next_no_input)
+        reset = create_buttons("Reset", 5, 70)
+        reset.clicked.connect(reset_thing)
 
+        widgets["reset_button"].append(reset)
+        grid.addWidget(widgets["reset_button"][-1], 3, 1)
         widgets["button"].append(next)
-        grid.addWidget(widgets["button"][-1], 3, 1)
+        grid.addWidget(widgets["button"][-1], 3, 2)
+    
+    if tag == "no NMR" or tag == "no way" or tag == "unorganic" or tag == "not halogenic" or tag == "done":
+        reset = create_buttons("Reset", 5, 85)
+        reset.clicked.connect(reset_thing)
+        widgets["reset_button"].append(reset)
+        grid.addWidget(widgets["reset_button"][-1], 3, 1)
         
     con = QLabel(text)
     con.setAlignment(QtCore.Qt.AlignCenter)
@@ -318,7 +320,7 @@ def create_buttons(answer, l_margin, r_margin):
         }
         '''
     )
-    if(answer == "Next"):
+    if(answer == "Next" or answer == "Reset"):
         return button
     else:
         button.clicked.connect(lambda x: get_answer(answer))
@@ -359,6 +361,24 @@ def frame1():
 
     # place global widgets on the grid
     grid.addWidget(widgets["button"][-1], 1, 0, 1, 2)
+
+def reset_thing():
+    model.reset2()
+    clear_widgets()
+    frame1()
+
+def show_frame1():
+    '''display frame 1'''
+    clear_widgets()
+    frame1()
+
+def start():
+    '''display frame 2'''
+    global model
+    model.reset()
+    clear_widgets() 
+    model = model_class.Model()
+    update_question_frame()
 
 # display frame 1
 def show_ques():

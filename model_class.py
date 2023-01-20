@@ -30,14 +30,35 @@ class Model():
 
     #empties out factBase when program starts
     def reset(self):
+        
+        Tree = ET.parse("rules.xml")
+        root = self.Tree.getroot()
+        fb = root.find("factBase")
 
-        
-        
-        fb = self.root.find("factBase")
+        if fb != None:
+            print("factBase found")
 
         for fact in fb.findall("fact") :
             fb.remove(fact)
-        print("in")
+        print("Reset factbase")
+
+        return
+    def reset2(self):
+        
+        # self.updateXML()
+       
+        Tree = ET.parse("rules.xml")
+        root = Tree.getroot()
+        fb = root.find("factBase")
+
+        if fb != None:
+            print("factBase found")
+
+        for fact in fb.findall("fact") :
+            fb.remove(fact)
+        print("Reset factbase")
+        Tree.write("rules.xml")
+
 
         return
 
@@ -170,13 +191,12 @@ class Model():
                         fact_count=0
             rule_count.append(fact_count)
             rule_idx+=1
-        # print(rule_count)
         prioritized_rule = rules[rule_count.index(max(rule_count))]
         return prioritized_rule
 
 
-        #checks facts in the factbase and sees if any of the rules can fire,
-        # if yes, the rule fires and the resulting fact is added to the factbase
+    #checks facts in the factbase and sees if any of the rules can fire,
+    # if yes, the rule fires and the resulting fact is added to the factbase
     def updateFactbase(self):
         self.updateXML()
         rules = self.root.findall("rule")
@@ -376,7 +396,7 @@ class Model():
             return False
         if "name" in recent_fact.attrib:
             s=recent_fact.attrib["name"].split("-")
-            if s[0]=="input":
+            if s[0]=="input" and recent_fact.text == "true":
                 return True
         return False
 
