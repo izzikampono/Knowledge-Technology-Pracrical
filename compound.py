@@ -34,8 +34,9 @@ class Compound():
     reactivity=""
     state =""
     polarity=""
-    fact_base=loadKB("kb2.json")
+    knowledge_base=loadKB("kb2.json")
     possible_list=[]
+    user_base = {}
 
     def setter(self,s):
         if s[0] =="name":
@@ -65,7 +66,7 @@ class Compound():
         
     @classmethod
     def initialize_possibilities(cls):
-        for i in cls.fact_base:
+        for i in cls.knowledge_base:
             cls.possible_list.append(str(i["name"]))
     
     def eliminate(self):
@@ -74,7 +75,7 @@ class Compound():
 
         self.initialize_possibilities()
         this_compound = self.__dict__
-        for compound in self.fact_base:
+        for compound in self.knowledge_base:
             for i,j in this_compound.items():
                 #print(i,j)
                 if i=="name":
@@ -91,20 +92,6 @@ class Compound():
         print(f"list of possible compounds : {self.possible_list}")
         return self.possible_list
 
-
-
-
-
-
-    # def __init__(self,nature,num_atoms,position,nature_hydro,reactivity,state,polarity):
-    #     self.nature=nature
-    #     self.num_atoms=num_atoms
-    #     self.position=position
-    #     self.nature_hydro=nature_hydro
-    #     self.reactivity=reactivity
-    #     self.state=state
-    #     self.polarity=polarity
-    #     return
     
     def import_dict(self,fact_dict): 
         print("Dictionary from factBase : \n")

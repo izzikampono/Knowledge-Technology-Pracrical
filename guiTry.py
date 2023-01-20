@@ -224,7 +224,7 @@ def get_possible_answer():
     return answer
 
 def show_frame_conclusion():
-    show = 0
+    dont_show = 0
     possible_answer = get_possible_answer()
     model.updateFactbase()
 
@@ -233,8 +233,8 @@ def show_frame_conclusion():
     text = conclusion.text
     tag = conclusion.attrib['value']
     
-    if tag == "unorganic" or tag == "not halogenic":
-        show = 1
+    if tag == "unorganic" or tag == "not halogenic" or tag=="no way":
+        dont_show = 1
     
     if tag == "perform spectrometry" or tag == "weigh compound" or tag == "weigh precipitate":
         next = create_buttons("Next", 5, 85)
@@ -268,7 +268,7 @@ def show_frame_conclusion():
     widgets["conclusion"].append(con)
     widgets["final_answer"].append(answer)
     grid.addWidget(widgets["conclusion"][-1], 1, 0, 1, 2)
-    if(show == 0):
+    if(dont_show == 0):
         grid.addWidget(widgets["final_answer"][-1], 2, 0, 1, 2)
 
 

@@ -203,22 +203,28 @@ class Model():
             counter+=1
 
     def calculateNumAtoms(self,molar_mass, compound_weight,precipitate_weight):
-        Mx={"flourinated":19,"brominated":80,"iodinated":127,"chlorinated":35.5}
+        Mx={"fluorate":19,"brominated":80,"iodinated":127,"chlorinated":35.5}
 
         fb = self.root.find("factBase")
         facts = fb.findall("fact")
         text = ""
 
+
         if molar_mass==None or compound_weight==None or precipitate_weight==None:
             print("unable to calculate num atoms")
             return 
+        
+
 
         for i in facts:
             if i.attrib["name"]=="nature":
                 nature=i.text
-        num_atoms = molar_mass*precipitate_weight/compound_weight*( 108 + Mx[nature])#type: ignore 
+        num_atoms = molar_mass*precipitate_weight/(compound_weight*( 108 + Mx[nature]))#type: ignore 
 
-        if num_atoms == 1:
+        print(f"molar mass : {molar_mass}, prec weight : {precipitate_weight} , compound w : {compound_weight} , num_atoms ={num_atoms}")
+
+
+        if num_atoms <= 1:
             text = "monohalogenated"
         if num_atoms>1:
             text =  "polyhalogenated"

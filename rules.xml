@@ -12,7 +12,7 @@
 
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">false</fact><fact name="conclusion">perform spectrometry</fact><fact name="num_atoms" /><fact name="num_atoms" /><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.33</fact><fact name="sp2">true</fact><fact name="reactivity">low</fact><fact name="conclusion">done</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow-ish white</fact><fact name="nature">brominated</fact><fact name="input-mass">false</fact><fact name="conclusion">perform spectrometry</fact><fact name="num_atoms" /><fact name="num_atoms" /><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="hydrogen-consumed">false</fact><fact name="saturation">true</fact><fact name="reactivity">normal</fact><fact name="conclusion">done</fact></factBase>
 
 
      <rule>
@@ -79,7 +79,7 @@
     <rule>
         <fact type="if" name="contain-halogen">true</fact>
         <fact type="if" name="precipitate-color">opalescent</fact>
-        <fact type="then" name="nature">fluorinated</fact>
+        <fact type="then" name="nature">fluorate</fact>
     </rule> 
     
     <rule>
