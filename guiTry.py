@@ -229,7 +229,8 @@ def show_frame_conclusion():
     
     if tag == "perform spectrometry" or tag == "weigh compound" or tag == "weigh precipitate":
         dont_show = 1
-        next = create_buttons("Next", 5, 70)
+        text = text + "\nClick next to answer the remaining questions. The system can still find possible candidates for the compound."
+        next = create_buttons("Next", 5, 30)
         next.clicked.connect(next_no_input)
         reset = create_buttons("Reset", 5, 70)
         reset.clicked.connect(reset_thing)
@@ -255,7 +256,7 @@ def show_frame_conclusion():
 
     con.setStyleSheet(
         "font-family: Shanti;" +
-        "font-size: 25px;" +
+        "font-size: 18px;" +
         "color: 'white';" +
         "padding: 75px;"
     )
@@ -269,7 +270,7 @@ def show_frame_conclusion():
     
     widgets["conclusion"].append(con)
     widgets["final_answer"].append(answer)
-    grid.addWidget(widgets["conclusion"][-1], 1, 0, 1, 2)
+    grid.addWidget(widgets["conclusion"][-1], 1, 0, 2, 3)
     if(dont_show == 0):
         grid.addWidget(widgets["final_answer"][-1], 2, 0, 1, 2)
 
@@ -360,10 +361,12 @@ def frame1():
     widgets["button"].append(button)
 
     # place global widgets on the grid
-    grid.addWidget(widgets["button"][-1], 1, 0, 1, 2)
+    grid.addWidget(widgets["button"][-1], 2, 0, 1, 2)
 
 def reset_thing():
+    global model
     model.reset2()
+    model = model_class.Model()
     clear_widgets()
     frame1()
 
@@ -376,8 +379,7 @@ def start():
     '''display frame 2'''
     global model
     model.reset()
-    clear_widgets() 
-    model = model_class.Model()
+    clear_widgets()
     update_question_frame()
 
 # display frame 1
