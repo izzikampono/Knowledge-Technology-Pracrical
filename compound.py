@@ -32,8 +32,9 @@ class Compound():
     position=""
     saturation= ""
     reactivity=""
-    state =""
+    aggregationState =""
     polarity=""
+    solubility=""
     knowledge_base=loadKB("kb2.json")
     possible_list=[]
     user_base = {}
@@ -54,11 +55,14 @@ class Compound():
         if s[0] =="saturation":
             self.saturation=s[1]
             return
+        if s[0] =="solubility":
+            self.solubility=s[1]
+            return
         if s[0] =="reactivity":
             self.reactivity=s[1]
             return
-        if s[0] =="state":
-            self.state=s[1]
+        if s[0] =="aggregationState":
+            self.aggregationState=s[1]
             return
         if s[0] =="polarity":
             self.polarity=s[1]
@@ -109,7 +113,7 @@ class Compound():
             "position" : self.position,
             "nature_hydro" : self.saturation,
             "reactivity" : self.reactivity,
-            "state" : self.state,
+            "state" : self.aggregationState,
             "polarity" : self.polarity,
             "num_atoms" : self.num_atoms }
         return dictionary
@@ -141,7 +145,7 @@ def loadFactBase(Tree):
 
 
     for fact in facts:
-        if fact.attrib["name"] in props(Compound)[1:7]:
+        if fact.attrib["name"] in props(Compound)[1:9]:
             facts_dictionary[fact.attrib["name"]]=fact.text
     return facts_dictionary
 

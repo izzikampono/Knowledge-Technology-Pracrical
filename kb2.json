@@ -1,91 +1,111 @@
-[
+ [
      {  "name" : "tetrafluoromethane",
         "nature": "fluorate",
         "num_atoms" : "polyhalogenated",
+        "aggregationState" : "gas",
         "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "gas"
+        "solubility":"organic compounds"
+
     } ,
     {
         "name": "difluoromethane",
         "nature" : "fluorate",
         "num_atoms" : "polyhalogenated",
+        "aggregationState" : "gas",
         "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "gas"
+        "solubility":"water"
+
     },
     {
         "name" : "ethyl fluoride",
         "nature" : "fluorate",
         "num_atoms": "monohalogenated",
         "position": "false",
+        "aggregationState": "gas",
         "saturation" : "true",
         "reactivity": "normal",
-        "state": "gas"
+        "solubility":"water"
+   
     },
     {   "name" : "chloromethane",
         "nature" : "chlorinated",
         "num_atoms" : " monohalogenated",
         "position" : "false",
+        "aggregationState": "gas",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state": "gas"
+        "solubility":"water"
+
     },
     {
         "name": "trichloromethane",
         "nature":"chlorinated",
         "num_atoms": "polyhalogenated",
+        "aggregationState": "liquid",
         "position": "geminal",
         "saturation": "true",
         "reactivity": "normal",
-        "state": "liquid"
+        "solubility":"organic compounds"
+
     },
     {
         "name" : "ethyl chloride",
         "nature" : "chlorinated",
         "num_atoms" : "monohalogenated",
+        "aggregationState" : "gas",
         "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "gas"
+        "solubility":"water"
+
     },
     {
         "name" : "propyl bromide",
         "nature" : "brominated",
         "num_atoms" : "monohalogenated",
         "position" : "false",
+        "aggregationState" : "liquid",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "solubility":"organic compounds"
+
     },
     {
         "name" : "bromobenzene",
         "nature" : "brominated",
         "num_atoms" : "monohalogenated",
         "position" : "false",
+        "aggregationState" : "liquid",
         "saturation" : "aromatic",
         "reactivity" : "low",
-        "state" : "liquid"
+        "solubility":"organic compounds"
+
     },
     {
         "name" : "ethyl bromide",
         "nature" : "brominated",
         "num_atoms" : "monohalogenated",
         "position" : "false",
+        "aggregationState" : "liquid",
         "saturation" : "saturated",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "solubility":"organic compounds"
+
     },
     {
         "name" : "dibromoethane",
         "nature" : "brominated",
         "num_atoms" : "polyhalogenated",
+        "aggregationState" : "liquid",
         "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "solubility":"water"
+
     },
     {
         "name" : "diiodomethane",
@@ -94,7 +114,7 @@
         "position" : "geminal",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "aggregationState" : "liquid"
     },
     {
         "name" : "ethyl iodide",
@@ -103,7 +123,9 @@
         "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"water"
+
     },
     {
         "name" : "1,2-dichloroethane",
@@ -112,7 +134,9 @@
         "position" : "neighbors",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"water"
+
     },
     {
         "name" : "2,3-dibromobutane",
@@ -121,7 +145,9 @@
         "position" : "neighbors",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     },
     {
         "name" : "1,2-diiodopropane",
@@ -130,7 +156,9 @@
         "position" : "neighbors",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     },
     {
         "name" : "2-chloro-propane",
@@ -139,7 +167,9 @@
         "position" : "false",
         "saturation" : "true",
         "reactivity" : "normal",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     },
     {  "name" : "vynil chloride",
         "nature": "iodinated",
@@ -147,7 +177,9 @@
         "position" : "false",
         "saturation" : "false",
         "reactivity" : "low",
-        "state" : "gas"
+        "aggregationState" : "gas",
+        "solubility":"organic compounds"
+
     } ,
     {  "name" : "1,1-dichloroethene",
         "nature": "iodinated",
@@ -155,7 +187,9 @@
         "position" : "geminal",
         "saturation" : "false",
         "reactivity" : "low",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     } ,
 
     {  "name" : "benzyl chloride",
@@ -164,7 +198,9 @@
         "position" : "false",
         "saturation" : "aromatic",
         "reactivity" : "high",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     } ,
     {  "name" : "allyl chloride",
         "nature": "chlorinated",
@@ -172,7 +208,9 @@
         "position" : "false",
         "saturation" : "false",
         "reactivity" : "high",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     } ,
     {  "name" : "chlorobenzene",
         "nature": "chlorinated",
@@ -180,7 +218,9 @@
         "position" : "false",
         "saturation" : "aromatic",
         "reactivity" : "low",
-        "state" : "liquid"
+        "aggregationState" : "liquid",
+        "solubility":"organic compounds"
+
     }      
     
     

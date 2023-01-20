@@ -12,10 +12,9 @@
 
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">yellow-ish white</fact><fact name="nature">brominated</fact><fact name="input-mass">false</fact><fact name="conclusion">perform spectrometry</fact><fact name="num_atoms" /><fact name="num_atoms" /><fact name="aggregation-state">liquid</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="hydrogen-consumed">false</fact><fact name="saturation">true</fact><fact name="reactivity">normal</fact><fact name="conclusion">done</fact></factBase>
+    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">true</fact><fact name="calculate-num-atoms" /><fact name="input-precipitate-weight">true</fact><fact name="num_atoms">monohalogenated</fact><fact name="position">false</fact><fact name="aggregationState">liquid</fact><fact name="solubility">water</fact><fact name="NMR">true</fact><fact name="double-bond">true</fact><fact name="bond-length">1.54</fact><fact name="conclusion">no way</fact></factBase>
 
-
-     <rule>
+    <rule>
         <fact type="if" name="burn-oxygen">false</fact>
         <fact type="then" name="organic">false</fact>
     </rule>
@@ -52,10 +51,7 @@
         <fact type="then" name="conclusion">not halogenic</fact>
     </rule>
 
-    <rule>
-        <fact type="if" name="num_atoms"> monohalogenated </fact>
-        <fact type="then" name="position"> false </fact>
-    </rule>
+   
 
     <rule>
         <fact type="if" name="contain-halogen">true</fact>
@@ -184,19 +180,19 @@
     <option> 
         <description>liquid</description>
         <then>
-            <fact name="aggregation-state">liquid</fact>
+            <fact name="aggregationState">liquid</fact>
         </then>
     </option>
     <option>
         <description>gas</description>
         <then>
-            <fact name="aggregation-state">gas</fact>
+            <fact name="aggregationState">gas</fact>
         </then>
     </option>
     <option>
         <description>solid</description>
         <then>
-            <fact name="aggregation-state">solid</fact>
+            <fact name="aggregationState">solid</fact>
         </then>
     </option>
     </question>
@@ -219,17 +215,28 @@
         <fact type="then" name="conclusion">no NMR</fact>
     </rule>
 
-  
-    
+    <question state="solubility">
+        <description>Is the compound soluble in water?</description>
+            <option>
+                <description>yes</description>
+                    <then> <fact name="solubility">water</fact></then>
+            </option>
+            <option>
+                <description>no</description>
+                    <then> <fact name="solubility">organic-compound</fact></then>
+            </option>
+            
+    </question>
     <question>
         <description>What type of bond is there?</description>
             <option>
                 <description>Double bond</description>
                     <then> <fact name="double-bond">true</fact></then>
             </option>
+            <option>
                 <description>Normal bond</description>
                     <then> <fact name="normal-bond">true</fact></then>
-            <option>
+            
             </option>
     </question>
 
@@ -261,6 +268,11 @@
         <fact type="if" name="normal-bond">true</fact>
         <fact type="if" name="bond-length">1.33</fact>
         <fact type="then" name="conclusion">no way</fact>
+    </rule>
+
+    <rule>
+        <fact type="if" name="num_atoms">monohalogenated</fact>
+        <fact type="then" name="position">false</fact>
     </rule>
 
 

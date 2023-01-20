@@ -14,7 +14,7 @@ from compound import *
 class Model():
     Tree = ET.parse("rules.xml")
     root = Tree.getroot()
-    states = ['organic',"nature","num_atoms","agg_state","bond_type","reactivity",'conclusion']
+    states = ['organic',"nature","num_atoms","agg_state","solubility","bond_type","reactivity",'conclusion']
     global_idx = 0
     state=states[global_idx]
     molar_mass = 0
@@ -330,17 +330,28 @@ class Model():
             self.state = "num_atoms"
             print(f"state changed to {self.state}")
             return
-        if recent_fact_name == "num_atoms":
+        if recent_fact_name == "num_atoms" or recent_fact_name == "position":
             self.state = "agg_state"
             print(f"state changed to {self.state}")
 
             return
-        if recent_fact_name== "aggregation-state":
+        if recent_fact_name== "aggregationState":
 
-            self.state = "bond_type"
+            self.state = "solubility"
             print(f"state changed to {self.state}")
 
             return
+        if recent_fact_name == "solubility":
+            self.state = "bond_type"
+            print(f"state changed to {self.state}")
+            return
+        if recent_fact_name == "bond_type":
+            self.state = "bond-length"
+            print(f"state changed to {self.state}")
+            return
+
+
+
         if recent_fact_name=="normal-bond" or recent_fact_name=="double-bond":
             self.state = "reactivity"
             print(f"state changed to {self.state}")
