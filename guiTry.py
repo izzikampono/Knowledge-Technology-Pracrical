@@ -171,6 +171,8 @@ def show_frame_input_text():
         label = "Input weight of compound:"
     elif len(list_of_input) == 2:
         label = "Input weight of precipitate:"
+    
+    label += "\n\nThe system only accepts 2 digits after the decimal point.\nMake sure you enter a number before pressing Next."
 
     question = QLabel(label)
     question.setAlignment(QtCore.Qt.AlignCenter)
@@ -208,7 +210,7 @@ def get_possible_answer():
     possible_answer = model.system_output()
     answer = ""
     if(len(possible_answer) > 0):
-        answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
+        answer = "Possible compound(s): \n" + possible_answer[0] + "\n"
         for x in range(1, len(possible_answer)):
             answer = answer + "\n" + str(possible_answer[x]) + "\n"
     
@@ -229,16 +231,16 @@ def show_frame_conclusion():
     
     if tag == "perform spectrometry" or tag == "weigh compound" or tag == "weigh precipitate":
         dont_show = 1
-        text = text + "\nClick next to answer the remaining questions. The system can still find possible candidates for the compound."
-        next = create_buttons("Next", 5, 30)
+        text = text + "\n Click Reset to start over OR click Next to answer the remaining questions. The system can still find possible candidates for the compound."
+        next = create_buttons("Next", 5, 75)
         next.clicked.connect(next_no_input)
-        reset = create_buttons("Reset", 5, 70)
+        reset = create_buttons("Reset", 75, 5)
         reset.clicked.connect(reset_thing)
 
         widgets["reset_button"].append(reset)
-        grid.addWidget(widgets["reset_button"][-1], 3, 1)
+        grid.addWidget(widgets["reset_button"][-1], 2, 0)
         widgets["button"].append(next)
-        grid.addWidget(widgets["button"][-1], 3, 2)
+        grid.addWidget(widgets["button"][-1], 2, 1)
     
     if tag == "no NMR" or tag == "no way" or tag == "unorganic" or tag == "not halogenic" or tag == "done":
         reset = create_buttons("Reset", 5, 85)
@@ -270,7 +272,7 @@ def show_frame_conclusion():
     
     widgets["conclusion"].append(con)
     widgets["final_answer"].append(answer)
-    grid.addWidget(widgets["conclusion"][-1], 1, 0, 2, 3)
+    grid.addWidget(widgets["conclusion"][-1], 1, 0, 1, 2)
     if(dont_show == 0):
         grid.addWidget(widgets["final_answer"][-1], 2, 0, 1, 2)
 
