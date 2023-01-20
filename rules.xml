@@ -11,7 +11,7 @@
         <answer value="done">&#10023;&#726;&#176;&#160;&#9825; &#9472;=&#8801;&#931;&#661;&#12387;&#8226;&#7461;&#8226;&#660;&#12387; System done with classification! &#65340;&#661; &#8226;&#7461;&#8226;&#660;&#65295; &#10023;&#726;&#176;&#160;&#9825;</answer>
     </goal>
 
-    <factBase><fact name="burn-oxygen">true</fact><fact name="co2">true</fact><fact name="organic">true</fact><fact name="react-silver">true</fact><fact name="contain-halogen">true</fact><fact name="precipitate-color">white</fact><fact name="nature">chlorinated</fact><fact name="input-mass">true</fact><fact name="input-compound-weight">true</fact><fact name="input-precipitate-weight">false</fact><fact name="conclusion">weigh precipitate</fact><fact name="num_atoms" /><fact name="num_atoms" /><fact name="aggregationState">gas</fact><fact name="solubility">water</fact><fact name="NMR">true</fact><fact name="normal-bond">true</fact><fact name="bond-length">1.54</fact><fact name="sp3">true</fact><fact name="hydrogenation test">true</fact><fact name="hydrogen-consumed">false</fact><fact name="saturation">true</fact><fact name="reactivity">normal</fact><fact name="conclusion">done</fact></factBase>
+    <factBase />
 
     <rule>
         <fact type="if" name="burn-oxygen">false</fact>
