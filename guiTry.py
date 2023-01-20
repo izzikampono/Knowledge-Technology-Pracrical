@@ -210,7 +210,7 @@ def get_possible_answer():
     possible_answer = model.system_output()
     answer = ""
     if(len(possible_answer) > 0):
-        answer = "Possible compound(s): \n" + possible_answer[0] + "\n"
+        answer = "Possible compound(s): \n\n" + possible_answer[0] + "\n"
         for x in range(1, len(possible_answer)):
             answer = answer + "\n" + str(possible_answer[x]) + "\n"
     
